@@ -1,0 +1,298 @@
+fileFormatVersion: 2
+guid: 81433ee8192c63544b778b6f13c2807c
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 12
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Light_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 4
+        width: 145
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 032caf50be647f74c808e13e62dc136e
+      internalID: -1065720815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 20d05a72ac388744ead387f39a222c2b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Light_0: -1065720815
+      Light_1: 1420556313
+      Light_2: 1735104072
+      stalfos edit_0: -7301796823122430959
+      stalfos edit_1: -4600989976037150496
+      stalfos edit_10: -1500002519391382016
+      stalfos edit_100: -557679724508111695
+      stalfos edit_101: -7778240239747815354
+      stalfos edit_102: 3352205072878842945
+      stalfos edit_103: -8044985151072315991
+      stalfos edit_104: 7736709051915318393
+      stalfos edit_105: -9005243584822230246
+      stalfos edit_106: 1071771862486320869
+      stalfos edit_107: 8730030991915318182
+      stalfos edit_108: 536189394521013040
+      stalfos edit_109: 9065586691059722089
+      stalfos edit_11: -470150157598677372
+      stalfos edit_110: 1391339469285749050
+      stalfos edit_111: 3376795277977739953
+      stalfos edit_112: -4688059037852945343
+      stalfos edit_113: -6183361199728214481
+      stalfos edit_114: 7547419599447439311
+      stalfos edit_115: -3578822038144734175
+      stalfos edit_116: -4009373901723622309
+      stalfos edit_117: 5826331326554523035
+      stalfos edit_118: 81324039982800597
+      stalfos edit_119: 8288260104687901428
+      stalfos edit_12: -5999101063890148513
+      stalfos edit_120: -4888079212402672936
+      stalfos edit_121: 4934718659790363067
+      stalfos edit_122: -7083200320850450981
+      stalfos edit_123: 7640026871101580620
+      stalfos edit_124: -1200728689308212878
+      stalfos edit_125: 87373210527965636
+      stalfos edit_126: -7789984270322723552
+      stalfos edit_127: -7817193507602023145
+      stalfos edit_128: 4095517588161732179
+      stalfos edit_129: -5184002700566167588
+      stalfos edit_13: -3331484782991686947
+      stalfos edit_130: -3602930671427850225
+      stalfos edit_131: 229532030523988565
+      stalfos edit_132: -3093010293367186309
+      stalfos edit_133: 1747400489410103501
+      stalfos edit_134: -8030793415267505571
+      stalfos edit_135: -3021490779966866453
+      stalfos edit_136: 4505728490453894132
+      stalfos edit_137: 8437909951322793378
+      stalfos edit_138: -6514053074721410919
+      stalfos edit_139: 3409453643340131145
+      stalfos edit_14: 3139044378586543411
+      stalfos edit_140: -7082673314402539370
+      stalfos edit_141: -5035368839482617767
+      stalfos edit_142: -941086773444295321
+      stalfos edit_15: -4239604017468535004
+      stalfos edit_16: 506122675383115830
+      stalfos edit_17: 3724306921787501640
+      stalfos edit_18: 7725469810405846277
+      stalfos edit_19: 5203438183934140626
+      stalfos edit_2: -5059145024700594060
+      stalfos edit_20: 8816503126172699381
+      stalfos edit_21: 2287652866724445293
+      stalfos edit_22: 3509005760338334425
+      stalfos edit_23: 2553602707694642268
+      stalfos edit_24: -3119008676788208914
+      stalfos edit_25: -5744592778533022744
+      stalfos edit_26: 2637570684035695887
+      stalfos edit_27: -1895056473181628340
+      stalfos edit_28: 760978886099978805
+      stalfos edit_29: 4591896134228852770
+      stalfos edit_3: -7807948664531081033
+      stalfos edit_30: -8291073274030347148
+      stalfos edit_31: -3110901243582480063
+      stalfos edit_32: 2618108316033411209
+      stalfos edit_33: -8344934655488739652
+      stalfos edit_34: -994896075021872572
+      stalfos edit_35: -81737710123222642
+      stalfos edit_36: 5491986593884047535
+      stalfos edit_37: 613988488618488433
+      stalfos edit_38: -3911849934573622586
+      stalfos edit_39: 5080988967052005097
+      stalfos edit_4: -5071858965498882791
+      stalfos edit_40: -4780512477802590266
+      stalfos edit_41: -5657525665882624857
+      stalfos edit_42: -4455276582190588848
+      stalfos edit_43: -7595089566625852089
+      stalfos edit_44: -101899167206401608
+      stalfos edit_45: 3063935289181129611
+      stalfos edit_46: -8196631088339230006
+      stalfos edit_47: -3543733578299131041
+      stalfos edit_48: 5507642513702767307
+      stalfos edit_49: 4907149514719418248
+      stalfos edit_5: -8838076740019104797
+      stalfos edit_50: -3922702079926224727
+      stalfos edit_51: -8917907255774208172
+      stalfos edit_52: -2556588423830738626
+      stalfos edit_53: -3430475176058989435
+      stalfos edit_54: -4015935044692377963
+      stalfos edit_55: 865736278387070109
+      stalfos edit_56: -4961430644339374891
+      stalfos edit_57: 9166712957272228529
+      stalfos edit_58: 878310204610224981
+      stalfos edit_59: 8349950055450209358
+      stalfos edit_6: 608609664195736651
+      stalfos edit_60: -8027388360977136861
+      stalfos edit_61: -6440468593862099405
+      stalfos edit_62: -2077946066053310929
+      stalfos edit_63: -7129662123350385690
+      stalfos edit_64: 5296754380123115367
+      stalfos edit_65: -1101262627845074042
+      stalfos edit_66: 5961009593408432803
+      stalfos edit_67: 3500315634665282986
+      stalfos edit_68: -8452465253162741540
+      stalfos edit_69: -3357693625779473572
+      stalfos edit_7: -8584535381697479431
+      stalfos edit_70: 3331143395505379838
+      stalfos edit_71: 2671087724056946201
+      stalfos edit_72: 6591936802048452461
+      stalfos edit_73: 5977330469988854256
+      stalfos edit_74: 8237648373638040005
+      stalfos edit_75: 6012729530613521086
+      stalfos edit_76: 7139504722009863433
+      stalfos edit_77: 75883254175902766
+      stalfos edit_78: 1273501184964415783
+      stalfos edit_79: -7716321875461750746
+      stalfos edit_8: 3166543439738493607
+      stalfos edit_80: 8675984819260463127
+      stalfos edit_81: -2110348241477919952
+      stalfos edit_82: 4400736467105297118
+      stalfos edit_83: 7509562979025566951
+      stalfos edit_84: 3895939938130177348
+      stalfos edit_85: 7217812494527543230
+      stalfos edit_86: 3389124021868679571
+      stalfos edit_87: 6493629548711010621
+      stalfos edit_88: 224668545959923767
+      stalfos edit_89: -1743228219849979177
+      stalfos edit_9: -7600742714627849004
+      stalfos edit_90: -4186462727258811085
+      stalfos edit_91: -5241641755090655703
+      stalfos edit_92: -4623374906354012614
+      stalfos edit_93: -8415156240877874592
+      stalfos edit_94: 8883010570049228655
+      stalfos edit_95: -4907696699240053494
+      stalfos edit_96: 5302192079741353826
+      stalfos edit_97: 8961779023379815598
+      stalfos edit_98: 3835218153246883028
+      stalfos edit_99: -5847206675400383422
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

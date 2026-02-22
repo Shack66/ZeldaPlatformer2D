@@ -1,0 +1,1417 @@
+fileFormatVersion: 2
+guid: 2e5bea3ce7299ef41887f38428434f32
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 12
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Background Temple_44
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 118
+        width: 153
+        height: 160
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8a6c7115ca45004bb4fe8594bf5d3f9
+      internalID: -2029162296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Temple_741
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 9
+        width: 48
+        height: 114
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7222ee9c454c40847ad5cb5490eb0cbe
+      internalID: -1517186435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Temple_745
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 9
+        width: 48
+        height: 114
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 998c3d5895681c7498542a6635df53cb
+      internalID: 2146952050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Temple_750
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 5
+        width: 48
+        height: 113
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad108e2448c65d44bbe9586b6861033f
+      internalID: -215404313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Temple_755
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 93
+        width: 48
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e73bb67d242b5534cb2865f074dd9d57
+      internalID: -1321818353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Temple_759
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 93
+        width: 48
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a08585e5134cb134da3a4b33b6f5ea43
+      internalID: 1589965721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Temple_859
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 74
+        width: 12
+        height: 12
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3efa776f81759c348b9cae16fbf44be6
+      internalID: 1247260048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Temple_863
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 71
+        width: 12
+        height: 17
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef1565c597382254c954f4e236967226
+      internalID: 1103751200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Temple_864
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 71
+        width: 12
+        height: 15
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f87b5c558922d649b344d5080f09260
+      internalID: 1205686783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Temple_877
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 50
+        width: 14
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85044d1e581632e458efc20366b89468
+      internalID: -2129897654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Temple_0
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 10
+        width: 191
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47497c97d2bc05d45ad6a9342a990f98
+      internalID: -257083534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Temple_1
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 74
+        width: 48
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28007894d27f43248821de801bc6027b
+      internalID: 477524566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 0e976e7cb31b274439436587771f7052
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":12.0,"y":12.0},"gridSpriteOffset":{"x":5.0,"y":5.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":1,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Background Temple_0: -257083534
+      Background Temple_1: 477524566
+      Background Temple_10: -1778920142
+      Background Temple_100: -1268275436
+      Background Temple_1000: -879760557
+      Background Temple_1001: 1874444855
+      Background Temple_1002: 359968855
+      Background Temple_1003: 2017583546
+      Background Temple_1004: -1796618298
+      Background Temple_1005: -1182097109
+      Background Temple_1006: -110887116
+      Background Temple_1007: -1205319364
+      Background Temple_1008: 248540092
+      Background Temple_1009: -1300448790
+      Background Temple_101: 768844608
+      Background Temple_1010: -1890608639
+      Background Temple_1011: 1693304845
+      Background Temple_1012: -2025028812
+      Background Temple_1013: -782349618
+      Background Temple_1014: -1363664517
+      Background Temple_1015: -1391842114
+      Background Temple_1016: -358775538
+      Background Temple_1017: -2141098506
+      Background Temple_1018: 1478479264
+      Background Temple_1019: 1268146760
+      Background Temple_102: 238622411
+      Background Temple_1020: -925591234
+      Background Temple_103: 120307021
+      Background Temple_104: -1302275592
+      Background Temple_105: 300992139
+      Background Temple_106: -2077746680
+      Background Temple_107: 520533915
+      Background Temple_108: -737487964
+      Background Temple_109: 365912735
+      Background Temple_11: -36117058
+      Background Temple_110: 254364896
+      Background Temple_111: 1483046634
+      Background Temple_112: -1473404119
+      Background Temple_113: -986799649
+      Background Temple_114: 980684339
+      Background Temple_115: -1791376792
+      Background Temple_116: 1076065042
+      Background Temple_117: 1442741034
+      Background Temple_118: 1828436113
+      Background Temple_119: -1063047641
+      Background Temple_12: 1581149604
+      Background Temple_120: -1920308928
+      Background Temple_121: 250276879
+      Background Temple_122: 1833040865
+      Background Temple_123: 960650452
+      Background Temple_124: -2062356827
+      Background Temple_125: -1232732925
+      Background Temple_126: -15524878
+      Background Temple_127: -168205877
+      Background Temple_128: -124969155
+      Background Temple_129: -1566629201
+      Background Temple_13: -179647098
+      Background Temple_130: 1205461274
+      Background Temple_131: 759681749
+      Background Temple_132: 1187292168
+      Background Temple_133: 490906060
+      Background Temple_134: 2054922032
+      Background Temple_135: -1537485380
+      Background Temple_136: -791441550
+      Background Temple_137: 1471044848
+      Background Temple_138: -1352845225
+      Background Temple_139: -2008905833
+      Background Temple_14: 1827674179
+      Background Temple_140: 2043758360
+      Background Temple_141: 316601603
+      Background Temple_142: -2143023569
+      Background Temple_143: -57372111
+      Background Temple_144: -1431511202
+      Background Temple_145: 1024489359
+      Background Temple_146: 1199151138
+      Background Temple_147: -1665444365
+      Background Temple_148: -2028142751
+      Background Temple_149: 73593362
+      Background Temple_15: -1556726286
+      Background Temple_150: 1504882666
+      Background Temple_151: 999300291
+      Background Temple_152: -1666222231
+      Background Temple_153: 205838848
+      Background Temple_154: 1693854858
+      Background Temple_155: -824991600
+      Background Temple_156: -1557183034
+      Background Temple_157: 937752398
+      Background Temple_158: 1312354198
+      Background Temple_159: 1873924722
+      Background Temple_16: 1893122251
+      Background Temple_160: 1267608664
+      Background Temple_161: 2089510568
+      Background Temple_162: -761670231
+      Background Temple_163: 1308903570
+      Background Temple_164: 1325952696
+      Background Temple_165: -1258893129
+      Background Temple_166: -26711328
+      Background Temple_167: -223481416
+      Background Temple_168: 812845227
+      Background Temple_169: -1176614009
+      Background Temple_17: 438882118
+      Background Temple_170: -1417153856
+      Background Temple_171: -1910563481
+      Background Temple_172: -2091686604
+      Background Temple_173: 1537959126
+      Background Temple_174: 176572416
+      Background Temple_175: 866919683
+      Background Temple_176: -1651020743
+      Background Temple_177: -623417897
+      Background Temple_178: 1932196781
+      Background Temple_179: -733996817
+      Background Temple_18: -1842354575
+      Background Temple_180: 68351617
+      Background Temple_181: -1704000167
+      Background Temple_182: -1528646726
+      Background Temple_183: 886074342
+      Background Temple_184: 401218297
+      Background Temple_185: -1782122604
+      Background Temple_186: -1100724010
+      Background Temple_187: -2101135298
+      Background Temple_188: 278953723
+      Background Temple_189: 251663242
+      Background Temple_19: 1535161648
+      Background Temple_190: -601852724
+      Background Temple_191: 1817492507
+      Background Temple_192: 1799076632
+      Background Temple_193: 148853645
+      Background Temple_194: 820262887
+      Background Temple_195: -1576017081
+      Background Temple_196: 549751956
+      Background Temple_197: 860246469
+      Background Temple_198: -1965804945
+      Background Temple_199: 1298856759
+      Background Temple_2: 1206781556
+      Background Temple_20: -861849054
+      Background Temple_200: -397508167
+      Background Temple_201: -104153497
+      Background Temple_202: -891895996
+      Background Temple_203: -361775429
+      Background Temple_204: 1536902755
+      Background Temple_205: -1491730300
+      Background Temple_206: 768834753
+      Background Temple_207: 377064374
+      Background Temple_208: -1082385913
+      Background Temple_209: 1928829593
+      Background Temple_21: 853199405
+      Background Temple_210: -1642255770
+      Background Temple_211: 86996335
+      Background Temple_212: 482951454
+      Background Temple_213: 2009139534
+      Background Temple_214: 496434310
+      Background Temple_215: -1122708067
+      Background Temple_216: -885188848
+      Background Temple_217: -2021563848
+      Background Temple_218: 185783342
+      Background Temple_219: 71849875
+      Background Temple_22: 212093133
+      Background Temple_220: -209022700
+      Background Temple_221: 1134232504
+      Background Temple_222: 1975369023
+      Background Temple_223: -422010390
+      Background Temple_224: 37018063
+      Background Temple_225: -953506454
+      Background Temple_226: 2027805453
+      Background Temple_227: -1320138644
+      Background Temple_228: -874772955
+      Background Temple_229: 712292316
+      Background Temple_23: -1648945465
+      Background Temple_230: 1995249778
+      Background Temple_231: -2124304079
+      Background Temple_232: -815185227
+      Background Temple_233: -1410378086
+      Background Temple_234: -1482983759
+      Background Temple_235: -1466578873
+      Background Temple_236: 846181353
+      Background Temple_237: 940822076
+      Background Temple_238: -303081907
+      Background Temple_239: -962770625
+      Background Temple_24: 1937362372
+      Background Temple_240: 702114159
+      Background Temple_241: -1632541439
+      Background Temple_242: 739552297
+      Background Temple_243: -1265708865
+      Background Temple_244: -2110179071
+      Background Temple_245: 1768749925
+      Background Temple_246: 439891720
+      Background Temple_247: 1501867258
+      Background Temple_248: -1842138330
+      Background Temple_249: -1319231062
+      Background Temple_25: -1769559104
+      Background Temple_250: -167825077
+      Background Temple_251: -599564877
+      Background Temple_252: -1861120382
+      Background Temple_253: 1318710344
+      Background Temple_254: 1215324820
+      Background Temple_255: -933241835
+      Background Temple_256: 942619400
+      Background Temple_257: 1329252509
+      Background Temple_258: -1845144934
+      Background Temple_259: 1954372665
+      Background Temple_26: 576490355
+      Background Temple_260: -116086952
+      Background Temple_261: 1792162086
+      Background Temple_262: -1092394842
+      Background Temple_263: 2131670930
+      Background Temple_264: -1680574217
+      Background Temple_265: 1604904892
+      Background Temple_266: -504245337
+      Background Temple_267: -459409036
+      Background Temple_268: -463747118
+      Background Temple_269: -1008225706
+      Background Temple_27: 1484623554
+      Background Temple_270: -661832782
+      Background Temple_271: 1030988489
+      Background Temple_272: 1520534407
+      Background Temple_273: -1278525248
+      Background Temple_274: 500285229
+      Background Temple_275: -1021054356
+      Background Temple_276: 822678864
+      Background Temple_277: 1191605283
+      Background Temple_278: 1120607178
+      Background Temple_279: -1132600030
+      Background Temple_28: -1744567177
+      Background Temple_280: 1000629322
+      Background Temple_281: -195429968
+      Background Temple_282: 1254075341
+      Background Temple_283: 960806622
+      Background Temple_284: 1392442258
+      Background Temple_285: -321633581
+      Background Temple_286: -635182864
+      Background Temple_287: 1615298833
+      Background Temple_288: 280444003
+      Background Temple_289: -1906099363
+      Background Temple_29: 1996171826
+      Background Temple_290: -856266699
+      Background Temple_291: 188211531
+      Background Temple_292: -1570578405
+      Background Temple_293: -14216368
+      Background Temple_294: 829780258
+      Background Temple_295: 1597871947
+      Background Temple_296: 1977026909
+      Background Temple_297: 1897356361
+      Background Temple_298: -1464282460
+      Background Temple_299: -806816966
+      Background Temple_3: -1172275855
+      Background Temple_30: -226575389
+      Background Temple_300: 254294347
+      Background Temple_301: -1833031845
+      Background Temple_302: -1994634035
+      Background Temple_303: 655638289
+      Background Temple_304: 2019731789
+      Background Temple_305: 1040827665
+      Background Temple_306: -47665153
+      Background Temple_307: 956763034
+      Background Temple_308: -94495878
+      Background Temple_309: 2128828050
+      Background Temple_31: 799267783
+      Background Temple_310: 153785882
+      Background Temple_311: -988680675
+      Background Temple_312: 2013920370
+      Background Temple_313: -765350632
+      Background Temple_314: 349504600
+      Background Temple_315: -621146422
+      Background Temple_316: -49484989
+      Background Temple_317: -783699991
+      Background Temple_318: 164115061
+      Background Temple_319: -557673190
+      Background Temple_32: -1074206130
+      Background Temple_320: 1345077748
+      Background Temple_321: -860844624
+      Background Temple_322: 352810480
+      Background Temple_323: -650409810
+      Background Temple_324: -974296417
+      Background Temple_325: 357066544
+      Background Temple_326: 126692408
+      Background Temple_327: 1025628568
+      Background Temple_328: -2115333437
+      Background Temple_329: 1267567549
+      Background Temple_33: -115407413
+      Background Temple_330: -305521892
+      Background Temple_331: -1619811693
+      Background Temple_332: -1045022573
+      Background Temple_333: -1937062295
+      Background Temple_334: -549778170
+      Background Temple_335: 1335715712
+      Background Temple_336: 548220387
+      Background Temple_337: -439594943
+      Background Temple_338: -99010320
+      Background Temple_339: -1802467072
+      Background Temple_34: -1726863560
+      Background Temple_340: -1378765626
+      Background Temple_341: 1327740202
+      Background Temple_342: 336895795
+      Background Temple_343: -555024618
+      Background Temple_344: -1883059906
+      Background Temple_345: -1844890689
+      Background Temple_346: 895066254
+      Background Temple_347: -111529183
+      Background Temple_348: 1586232445
+      Background Temple_349: -929806684
+      Background Temple_35: -1985368045
+      Background Temple_350: -1571971061
+      Background Temple_351: -444816711
+      Background Temple_352: 2135586529
+      Background Temple_353: 1701933869
+      Background Temple_354: 1963376888
+      Background Temple_355: 640830619
+      Background Temple_356: 712710539
+      Background Temple_357: -1301814135
+      Background Temple_358: 1347932145
+      Background Temple_359: 400522855
+      Background Temple_36: -1178998880
+      Background Temple_360: -1312822160
+      Background Temple_361: 208114058
+      Background Temple_362: -1144987923
+      Background Temple_363: 2032595269
+      Background Temple_364: 2088867105
+      Background Temple_365: 1397083935
+      Background Temple_366: 1295219335
+      Background Temple_367: -99322044
+      Background Temple_368: -959126067
+      Background Temple_369: 607084898
+      Background Temple_37: 629976772
+      Background Temple_370: 702891690
+      Background Temple_371: 983795784
+      Background Temple_372: 1479761357
+      Background Temple_373: -1005023520
+      Background Temple_374: -593486877
+      Background Temple_375: -710156857
+      Background Temple_376: -1932706623
+      Background Temple_377: -1047875117
+      Background Temple_378: -1575065018
+      Background Temple_379: 629929846
+      Background Temple_38: 1427891996
+      Background Temple_380: -176545120
+      Background Temple_381: -1032879837
+      Background Temple_382: 584788728
+      Background Temple_383: 1898471417
+      Background Temple_384: 1177178966
+      Background Temple_385: 1934653191
+      Background Temple_386: 372623673
+      Background Temple_387: -1917838465
+      Background Temple_388: -1826611703
+      Background Temple_389: -1018322859
+      Background Temple_39: -1174263794
+      Background Temple_390: -675738690
+      Background Temple_391: 2080556783
+      Background Temple_392: 1284533841
+      Background Temple_393: 3541136
+      Background Temple_394: -528850185
+      Background Temple_395: -375728383
+      Background Temple_396: -1716706212
+      Background Temple_397: 1165100788
+      Background Temple_398: 1100511155
+      Background Temple_399: -1905049793
+      Background Temple_4: 951033292
+      Background Temple_40: 1893892489
+      Background Temple_400: 542200025
+      Background Temple_401: 925485523
+      Background Temple_402: 1091536269
+      Background Temple_403: -1268034851
+      Background Temple_404: 871176155
+      Background Temple_405: -1016462488
+      Background Temple_406: 386823763
+      Background Temple_407: -278214862
+      Background Temple_408: 508818076
+      Background Temple_409: 1842139319
+      Background Temple_41: 1113830337
+      Background Temple_410: -1595002789
+      Background Temple_411: 817692839
+      Background Temple_412: -1798641222
+      Background Temple_413: -2080171538
+      Background Temple_414: 1449007329
+      Background Temple_415: -773716601
+      Background Temple_416: -875436395
+      Background Temple_417: -902752048
+      Background Temple_418: 1214105927
+      Background Temple_419: -1526408328
+      Background Temple_42: -2009748297
+      Background Temple_420: -34775174
+      Background Temple_421: -1468013617
+      Background Temple_422: 1548913522
+      Background Temple_423: -260058229
+      Background Temple_424: -1224825389
+      Background Temple_425: -843169408
+      Background Temple_426: -1952632454
+      Background Temple_427: 155090520
+      Background Temple_428: 440936372
+      Background Temple_429: 1608366512
+      Background Temple_43: 776436001
+      Background Temple_430: -19058001
+      Background Temple_431: 550762202
+      Background Temple_432: -1860711596
+      Background Temple_433: -50844156
+      Background Temple_434: -1496886661
+      Background Temple_435: 834150906
+      Background Temple_436: 1221201000
+      Background Temple_437: -460219264
+      Background Temple_438: -105174925
+      Background Temple_439: -607058774
+      Background Temple_44: -2029162296
+      Background Temple_440: -334244591
+      Background Temple_441: -160927056
+      Background Temple_442: 923899642
+      Background Temple_443: -1103409242
+      Background Temple_444: -184408275
+      Background Temple_445: 456460903
+      Background Temple_446: -1198937413
+      Background Temple_447: 177875194
+      Background Temple_448: 87328424
+      Background Temple_449: -946529946
+      Background Temple_45: 845956802
+      Background Temple_450: -1414856490
+      Background Temple_451: 1774654161
+      Background Temple_452: -244848546
+      Background Temple_453: -1139853786
+      Background Temple_454: -626727147
+      Background Temple_455: 864995968
+      Background Temple_456: 246810980
+      Background Temple_457: -953010135
+      Background Temple_458: 2032432219
+      Background Temple_459: -857315498
+      Background Temple_46: -1407491303
+      Background Temple_460: -195206742
+      Background Temple_461: 1907469409
+      Background Temple_462: 1941333249
+      Background Temple_463: 2036332322
+      Background Temple_464: -222633915
+      Background Temple_465: -1677846647
+      Background Temple_466: -263868523
+      Background Temple_467: -2108072759
+      Background Temple_468: -581724386
+      Background Temple_469: -1166134803
+      Background Temple_47: 1211096946
+      Background Temple_470: -186240561
+      Background Temple_471: 228443406
+      Background Temple_472: 1499697929
+      Background Temple_473: -1795589514
+      Background Temple_474: -1894569127
+      Background Temple_475: 601754771
+      Background Temple_476: -1802550539
+      Background Temple_477: 216065322
+      Background Temple_478: 243902799
+      Background Temple_479: 1218927834
+      Background Temple_48: 1998217858
+      Background Temple_480: 1415010948
+      Background Temple_481: 1859663294
+      Background Temple_482: -1839811711
+      Background Temple_483: -415759877
+      Background Temple_484: 270997068
+      Background Temple_485: 171333963
+      Background Temple_486: -1316304579
+      Background Temple_487: -238698093
+      Background Temple_488: 1811735031
+      Background Temple_489: 1111460486
+      Background Temple_49: 1845982933
+      Background Temple_490: 115933723
+      Background Temple_491: 1773905385
+      Background Temple_492: -1779867623
+      Background Temple_493: -1520182444
+      Background Temple_494: -497316755
+      Background Temple_495: 399868443
+      Background Temple_496: -1164401469
+      Background Temple_497: -861239378
+      Background Temple_498: 1997900980
+      Background Temple_499: 1164315835
+      Background Temple_5: 234300034
+      Background Temple_50: 103832178
+      Background Temple_500: 2048311242
+      Background Temple_501: 1664082515
+      Background Temple_502: -691461189
+      Background Temple_503: 194269706
+      Background Temple_504: 259688903
+      Background Temple_505: 1244851007
+      Background Temple_506: 518447634
+      Background Temple_507: 1493026923
+      Background Temple_508: -1268315140
+      Background Temple_509: 1281145494
+      Background Temple_51: 1271342104
+      Background Temple_510: -1967876471
+      Background Temple_511: 568097601
+      Background Temple_512: 1394534798
+      Background Temple_513: -786495329
+      Background Temple_514: -1183150404
+      Background Temple_515: 1164473527
+      Background Temple_516: 993648493
+      Background Temple_517: -1174590846
+      Background Temple_518: -664834905
+      Background Temple_519: -1121636294
+      Background Temple_52: -1370913943
+      Background Temple_520: -496606127
+      Background Temple_521: -1351787288
+      Background Temple_522: -587745799
+      Background Temple_523: 2042374386
+      Background Temple_524: -1436243035
+      Background Temple_525: -352101175
+      Background Temple_526: -381175844
+      Background Temple_527: 261030627
+      Background Temple_528: -1287911248
+      Background Temple_529: -1319036781
+      Background Temple_53: -737556607
+      Background Temple_530: -79518787
+      Background Temple_531: 706318106
+      Background Temple_532: -892630109
+      Background Temple_533: 1927790987
+      Background Temple_534: 966342557
+      Background Temple_535: 2006635977
+      Background Temple_536: 73856809
+      Background Temple_537: 1667122261
+      Background Temple_538: 918672341
+      Background Temple_539: 2057551572
+      Background Temple_54: -1097792677
+      Background Temple_540: 648246925
+      Background Temple_541: -208202978
+      Background Temple_542: -553318353
+      Background Temple_543: -1505048340
+      Background Temple_544: -296684635
+      Background Temple_545: -1747019968
+      Background Temple_546: 855643323
+      Background Temple_547: -736248775
+      Background Temple_548: 857971510
+      Background Temple_549: 524046805
+      Background Temple_55: -1100982813
+      Background Temple_550: -363661552
+      Background Temple_551: 1420629300
+      Background Temple_552: 857404042
+      Background Temple_553: -566513262
+      Background Temple_554: -1054837460
+      Background Temple_555: -531049247
+      Background Temple_556: -1062739331
+      Background Temple_557: -1756735252
+      Background Temple_558: -1042347878
+      Background Temple_559: 1756485598
+      Background Temple_56: 988236487
+      Background Temple_560: 1048562635
+      Background Temple_561: -1034159188
+      Background Temple_562: 1904378314
+      Background Temple_563: -1591413651
+      Background Temple_564: -78848779
+      Background Temple_565: -1218996345
+      Background Temple_566: 812696709
+      Background Temple_567: 250978828
+      Background Temple_568: -1495387995
+      Background Temple_569: -1593449304
+      Background Temple_57: 53278358
+      Background Temple_570: -891683304
+      Background Temple_571: 1962002047
+      Background Temple_572: -744786875
+      Background Temple_573: 1210939827
+      Background Temple_574: 1420018620
+      Background Temple_575: 756243916
+      Background Temple_576: 1802705286
+      Background Temple_577: -1476161647
+      Background Temple_578: -1433340010
+      Background Temple_579: 102581086
+      Background Temple_58: 47842829
+      Background Temple_580: -769998940
+      Background Temple_581: 1010653079
+      Background Temple_582: 1199240324
+      Background Temple_583: -1014559143
+      Background Temple_584: -976219698
+      Background Temple_585: -943083884
+      Background Temple_586: -280980378
+      Background Temple_587: 1667011132
+      Background Temple_588: 1456458331
+      Background Temple_589: -884020822
+      Background Temple_59: -1136169500
+      Background Temple_590: 167937388
+      Background Temple_591: 987787383
+      Background Temple_592: 642100232
+      Background Temple_593: -1892982625
+      Background Temple_594: 1847311249
+      Background Temple_595: 1458895323
+      Background Temple_596: 501212863
+      Background Temple_597: 281021191
+      Background Temple_598: -106107998
+      Background Temple_599: -509343700
+      Background Temple_6: -2071967434
+      Background Temple_60: 1517408286
+      Background Temple_600: -1395421138
+      Background Temple_601: -1617979972
+      Background Temple_602: -127474124
+      Background Temple_603: 507486540
+      Background Temple_604: -775801239
+      Background Temple_605: 1212562291
+      Background Temple_606: -2069380681
+      Background Temple_607: 1344018661
+      Background Temple_608: -2020321634
+      Background Temple_609: -1343458860
+      Background Temple_61: -1264997490
+      Background Temple_610: -1044083212
+      Background Temple_611: 776519982
+      Background Temple_612: -389298032
+      Background Temple_613: 747201420
+      Background Temple_614: -456263892
+      Background Temple_615: 1327079526
+      Background Temple_616: 626093635
+      Background Temple_617: -1661054463
+      Background Temple_618: 718408401
+      Background Temple_619: 1556194536
+      Background Temple_62: -1156302807
+      Background Temple_620: 1380851963
+      Background Temple_621: -1508897591
+      Background Temple_622: -1310598998
+      Background Temple_623: 390530684
+      Background Temple_624: -419279091
+      Background Temple_625: 2099010992
+      Background Temple_626: 2068284622
+      Background Temple_627: 957884471
+      Background Temple_628: -544317056
+      Background Temple_629: 1467136979
+      Background Temple_63: -1477412774
+      Background Temple_630: -202865572
+      Background Temple_631: -1599140158
+      Background Temple_632: -1817966032
+      Background Temple_633: 1223630619
+      Background Temple_634: -822860297
+      Background Temple_635: -668151014
+      Background Temple_636: 2069331376
+      Background Temple_637: 1951673066
+      Background Temple_638: -1031571836
+      Background Temple_639: -705662738
+      Background Temple_64: 1780519922
+      Background Temple_640: 657821891
+      Background Temple_641: 1861149851
+      Background Temple_642: -1963494525
+      Background Temple_643: -661108879
+      Background Temple_644: -1302644397
+      Background Temple_645: -1351843280
+      Background Temple_646: -948530943
+      Background Temple_647: -1860064618
+      Background Temple_648: -371845311
+      Background Temple_649: 680317736
+      Background Temple_65: -253444575
+      Background Temple_650: -289883294
+      Background Temple_651: 125490080
+      Background Temple_652: 1013482447
+      Background Temple_653: 1638111138
+      Background Temple_654: -1339876309
+      Background Temple_655: 2006827817
+      Background Temple_656: -2092732411
+      Background Temple_657: -1624959429
+      Background Temple_658: -900908491
+      Background Temple_659: 361830274
+      Background Temple_66: -375662553
+      Background Temple_660: -2097487678
+      Background Temple_661: -2043003161
+      Background Temple_662: 2125572377
+      Background Temple_663: 114190482
+      Background Temple_664: 394342092
+      Background Temple_665: -164349221
+      Background Temple_666: 496813565
+      Background Temple_667: -1076913138
+      Background Temple_668: -1075017115
+      Background Temple_669: -1602499023
+      Background Temple_67: 2077755330
+      Background Temple_670: -1303182486
+      Background Temple_671: 709448158
+      Background Temple_672: 2136543105
+      Background Temple_673: 777936205
+      Background Temple_674: -1287166591
+      Background Temple_675: -202242737
+      Background Temple_676: -1616030297
+      Background Temple_677: -1059190048
+      Background Temple_678: -1411850858
+      Background Temple_679: -505007095
+      Background Temple_68: 275228418
+      Background Temple_680: -1858898651
+      Background Temple_681: 648240275
+      Background Temple_682: 451801315
+      Background Temple_683: 492547711
+      Background Temple_684: -1968485178
+      Background Temple_685: 821762320
+      Background Temple_686: -1040224584
+      Background Temple_687: 732483090
+      Background Temple_688: 850208422
+      Background Temple_689: -907706316
+      Background Temple_69: 1194006774
+      Background Temple_690: 17847565
+      Background Temple_691: 468818320
+      Background Temple_692: 48693778
+      Background Temple_693: 1443717283
+      Background Temple_694: -1024177203
+      Background Temple_695: 489163322
+      Background Temple_696: -1192812105
+      Background Temple_697: 1844106284
+      Background Temple_698: 1019631312
+      Background Temple_699: 1710227217
+      Background Temple_7: -571306242
+      Background Temple_70: -2128528827
+      Background Temple_700: -75244839
+      Background Temple_701: 1812099807
+      Background Temple_702: 733005326
+      Background Temple_703: -1997418052
+      Background Temple_704: -1610283859
+      Background Temple_705: -1040888915
+      Background Temple_706: 1957966344
+      Background Temple_707: 282972304
+      Background Temple_708: 1220716097
+      Background Temple_709: 711953713
+      Background Temple_71: -571893812
+      Background Temple_710: 190087451
+      Background Temple_711: -1788208977
+      Background Temple_712: 667235782
+      Background Temple_713: -1960432402
+      Background Temple_714: -1111008545
+      Background Temple_715: 1844232419
+      Background Temple_716: -43006732
+      Background Temple_717: 2071319385
+      Background Temple_718: -468369683
+      Background Temple_719: -746843928
+      Background Temple_72: -955190035
+      Background Temple_720: 1765615538
+      Background Temple_721: 1350367384
+      Background Temple_722: -380476716
+      Background Temple_723: 1918656947
+      Background Temple_724: 1946520062
+      Background Temple_725: -1408538218
+      Background Temple_726: 1805353002
+      Background Temple_727: -33201726
+      Background Temple_728: 1428933339
+      Background Temple_729: 1803412859
+      Background Temple_73: 1390069306
+      Background Temple_730: 1128378855
+      Background Temple_731: 1075484578
+      Background Temple_732: 807018721
+      Background Temple_733: 761165855
+      Background Temple_734: 26277544
+      Background Temple_735: 800120117
+      Background Temple_736: 1144023945
+      Background Temple_737: -1704698062
+      Background Temple_738: 1159721229
+      Background Temple_739: 1096380969
+      Background Temple_74: -604575225
+      Background Temple_740: 472136193
+      Background Temple_741: -1517186435
+      Background Temple_742: -848070464
+      Background Temple_743: -1488331729
+      Background Temple_744: 1890304074
+      Background Temple_745: 2146952050
+      Background Temple_746: 544581951
+      Background Temple_747: 113599445
+      Background Temple_748: 316911718
+      Background Temple_749: -911332377
+      Background Temple_75: -57505227
+      Background Temple_750: -215404313
+      Background Temple_751: 653642090
+      Background Temple_752: 1423301118
+      Background Temple_753: 281581370
+      Background Temple_754: 1665237780
+      Background Temple_755: -1321818353
+      Background Temple_756: 212599255
+      Background Temple_757: 307437438
+      Background Temple_758: -1083841770
+      Background Temple_759: 1589965721
+      Background Temple_76: -1943082830
+      Background Temple_760: -316713098
+      Background Temple_761: -1259318856
+      Background Temple_762: 1399061912
+      Background Temple_763: 1617244515
+      Background Temple_764: -866684700
+      Background Temple_765: -465641795
+      Background Temple_766: -2116754178
+      Background Temple_767: 176630097
+      Background Temple_768: -819606144
+      Background Temple_769: -1194053947
+      Background Temple_77: -1655046362
+      Background Temple_770: 2003044199
+      Background Temple_771: 986618958
+      Background Temple_772: -360421530
+      Background Temple_773: 1734173943
+      Background Temple_774: -1132705775
+      Background Temple_775: 707636172
+      Background Temple_776: 957831287
+      Background Temple_777: 269158501
+      Background Temple_778: 595195273
+      Background Temple_779: 1108289996
+      Background Temple_78: 1231806635
+      Background Temple_780: 788040922
+      Background Temple_781: -299317064
+      Background Temple_782: -1724764238
+      Background Temple_783: 373420328
+      Background Temple_784: -880163096
+      Background Temple_785: 821577665
+      Background Temple_786: -1297403403
+      Background Temple_787: 741666397
+      Background Temple_788: 951929400
+      Background Temple_789: -750869636
+      Background Temple_79: -482868732
+      Background Temple_790: -128156562
+      Background Temple_791: -1558967218
+      Background Temple_792: 593548202
+      Background Temple_793: -298575569
+      Background Temple_794: 156321780
+      Background Temple_795: 807799133
+      Background Temple_796: 775018002
+      Background Temple_797: 2050349977
+      Background Temple_798: -892061763
+      Background Temple_799: 834843502
+      Background Temple_8: 1386243854
+      Background Temple_80: 951637484
+      Background Temple_800: -870490597
+      Background Temple_801: -583484256
+      Background Temple_802: -1332105162
+      Background Temple_803: -2068643696
+      Background Temple_804: 90744980
+      Background Temple_805: -934018337
+      Background Temple_806: -1657292969
+      Background Temple_807: 429030088
+      Background Temple_808: -1834049111
+      Background Temple_809: -1693241968
+      Background Temple_81: 1607118388
+      Background Temple_810: -474993837
+      Background Temple_811: 288573478
+      Background Temple_812: -1759857529
+      Background Temple_813: -1774565105
+      Background Temple_814: -532250397
+      Background Temple_815: 1634158775
+      Background Temple_816: -1331995114
+      Background Temple_817: -1488299360
+      Background Temple_818: -2071511433
+      Background Temple_819: -599093222
+      Background Temple_82: -1759808960
+      Background Temple_820: -762174109
+      Background Temple_821: 1066095887
+      Background Temple_822: -92533602
+      Background Temple_823: -539712880
+      Background Temple_824: -907186067
+      Background Temple_825: -1259724255
+      Background Temple_826: -850437685
+      Background Temple_827: -1262694646
+      Background Temple_828: -952320276
+      Background Temple_829: 782627144
+      Background Temple_83: 428178786
+      Background Temple_830: -886151820
+      Background Temple_831: 848320548
+      Background Temple_832: -141306772
+      Background Temple_833: 878545001
+      Background Temple_834: 1279862296
+      Background Temple_835: 1313819599
+      Background Temple_836: -829321058
+      Background Temple_837: -104733208
+      Background Temple_838: 1532115569
+      Background Temple_839: 23332297
+      Background Temple_84: 753967331
+      Background Temple_840: -766104718
+      Background Temple_841: 1542958293
+      Background Temple_842: -501930667
+      Background Temple_843: -1937789833
+      Background Temple_844: 1606026424
+      Background Temple_845: -1686401085
+      Background Temple_846: 753189908
+      Background Temple_847: 1026659286
+      Background Temple_848: 38873936
+      Background Temple_849: 203503100
+      Background Temple_85: -1053813532
+      Background Temple_850: -1869422415
+      Background Temple_851: -1986745519
+      Background Temple_852: 1557476258
+      Background Temple_853: 763316135
+      Background Temple_854: -1605383371
+      Background Temple_855: -190892330
+      Background Temple_856: 53610520
+      Background Temple_857: 1026287172
+      Background Temple_858: -1401837453
+      Background Temple_859: 1247260048
+      Background Temple_86: -1981427442
+      Background Temple_860: 1676780876
+      Background Temple_861: -1659527568
+      Background Temple_862: -1619309815
+      Background Temple_863: 1103751200
+      Background Temple_864: 1205686783
+      Background Temple_865: -1259016099
+      Background Temple_866: 697958134
+      Background Temple_867: -769854079
+      Background Temple_868: 1312792087
+      Background Temple_869: 1755269305
+      Background Temple_87: -1306757269
+      Background Temple_870: 921358658
+      Background Temple_871: 1221009248
+      Background Temple_872: -341550628
+      Background Temple_873: 928333755
+      Background Temple_874: -563741691
+      Background Temple_875: 1049418034
+      Background Temple_876: 641734133
+      Background Temple_877: -2129897654
+      Background Temple_878: 1827336574
+      Background Temple_879: -1745125263
+      Background Temple_88: -1989496848
+      Background Temple_880: 309545022
+      Background Temple_881: 30860474
+      Background Temple_882: 1062522175
+      Background Temple_883: -1156763565
+      Background Temple_884: -872839901
+      Background Temple_885: 989818020
+      Background Temple_886: -1222237857
+      Background Temple_887: -374396580
+      Background Temple_888: -1265112126
+      Background Temple_889: 910976112
+      Background Temple_89: 1338118945
+      Background Temple_890: 1564689198
+      Background Temple_891: 190185072
+      Background Temple_892: 1735619235
+      Background Temple_893: -1681387399
+      Background Temple_894: 967492715
+      Background Temple_895: 1716214586
+      Background Temple_896: 578037158
+      Background Temple_897: 1752835305
+      Background Temple_898: -1693080469
+      Background Temple_899: -1143942588
+      Background Temple_9: -818193468
+      Background Temple_90: 1930468764
+      Background Temple_900: 156453340
+      Background Temple_901: -970162058
+      Background Temple_902: -994453989
+      Background Temple_903: -653413166
+      Background Temple_904: -517081811
+      Background Temple_905: 1969995008
+      Background Temple_906: -1528885241
+      Background Temple_907: -826332179
+      Background Temple_908: 1074998716
+      Background Temple_909: 1256502431
+      Background Temple_91: 15888842
+      Background Temple_910: 1728989522
+      Background Temple_911: -1625746661
+      Background Temple_912: -1108101208
+      Background Temple_913: 241944389
+      Background Temple_914: 1621000611
+      Background Temple_915: 531319939
+      Background Temple_916: 354770594
+      Background Temple_917: 2116823365
+      Background Temple_918: -1613649276
+      Background Temple_919: 460745689
+      Background Temple_92: -1333863551
+      Background Temple_920: 1759940793
+      Background Temple_921: -1495607383
+      Background Temple_922: 2134009240
+      Background Temple_923: -453833602
+      Background Temple_924: -637541284
+      Background Temple_925: -775416235
+      Background Temple_926: -1608103022
+      Background Temple_927: -841565266
+      Background Temple_928: 902901464
+      Background Temple_929: -854223409
+      Background Temple_93: -332780413
+      Background Temple_930: -1784485846
+      Background Temple_931: 2087309601
+      Background Temple_932: -1508029559
+      Background Temple_933: 1576355976
+      Background Temple_934: -1830054459
+      Background Temple_935: -2084838933
+      Background Temple_936: -847774913
+      Background Temple_937: 1632997860
+      Background Temple_938: 885525564
+      Background Temple_939: 186169940
+      Background Temple_94: -1272327502
+      Background Temple_940: -1226373163
+      Background Temple_941: 86134678
+      Background Temple_942: -1705432536
+      Background Temple_943: -908320057
+      Background Temple_944: 1023422943
+      Background Temple_945: 1278104528
+      Background Temple_946: 754610129
+      Background Temple_947: -1727841806
+      Background Temple_948: 620332403
+      Background Temple_949: -934392813
+      Background Temple_95: -38927623
+      Background Temple_950: -1451570716
+      Background Temple_951: 1650583688
+      Background Temple_952: 124781606
+      Background Temple_953: 83255017
+      Background Temple_954: -848074005
+      Background Temple_955: 403072101
+      Background Temple_956: -1352754745
+      Background Temple_957: -130228020
+      Background Temple_958: -490529182
+      Background Temple_959: -1484032869
+      Background Temple_96: -999768183
+      Background Temple_960: 1856171895
+      Background Temple_961: -1506504674
+      Background Temple_962: -2063879908
+      Background Temple_963: -1709122011
+      Background Temple_964: 854862808
+      Background Temple_965: 985914795
+      Background Temple_966: -1335082643
+      Background Temple_967: -1970848373
+      Background Temple_968: -288621869
+      Background Temple_969: 549662096
+      Background Temple_97: 119048663
+      Background Temple_970: 821418040
+      Background Temple_971: 229265220
+      Background Temple_972: 1782148329
+      Background Temple_973: 316652689
+      Background Temple_974: 1177473210
+      Background Temple_975: 166528725
+      Background Temple_976: 1111287819
+      Background Temple_977: -821604270
+      Background Temple_978: 1845501505
+      Background Temple_979: 2119148417
+      Background Temple_98: -1888020952
+      Background Temple_980: -1363851555
+      Background Temple_981: -1406900240
+      Background Temple_982: 352938448
+      Background Temple_983: -888685093
+      Background Temple_984: 2033480145
+      Background Temple_985: -668261814
+      Background Temple_986: 1512044682
+      Background Temple_987: 256641881
+      Background Temple_988: 1776648444
+      Background Temple_989: -881352173
+      Background Temple_99: 1945461612
+      Background Temple_990: -831580935
+      Background Temple_991: -731318812
+      Background Temple_992: -328847128
+      Background Temple_993: -791037859
+      Background Temple_994: 32089886
+      Background Temple_995: -1172991348
+      Background Temple_996: -744737237
+      Background Temple_997: 300110840
+      Background Temple_998: -1265443083
+      Background Temple_999: -348767259
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

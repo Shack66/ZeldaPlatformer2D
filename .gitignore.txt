@@ -1,0 +1,18 @@
+/[Ll]ibrary/
+/[Tt]emp/
+/[Obj]/
+/[Build]/
+/[Builds]/
+/[Logs]/
+/[UserSettings]/
+
+# Don't upload solution files from Visual Studio
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+
+# System files
+.DS_Store
+Thumbs.db
