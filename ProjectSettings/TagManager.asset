@@ -41,22 +41,22 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Fondo_Lejano
+  - name: BG_Distant
     uniqueID: 2980857633
     locked: 0
-  - name: Fondo_Detalles
-    uniqueID: 1779049123
-    locked: 0
-  - name: Fondo_Estructura
+  - name: BG_Structure
     uniqueID: 2122573345
     locked: 0
-  - name: Suelo
+  - name: BG_Decoration
+    uniqueID: 1779049123
+    locked: 0
+  - name: Floor
     uniqueID: 2289019287
     locked: 0
   - name: Player
     uniqueID: 505877735
     locked: 0
-  - name: Luces
+  - name: Lights
     uniqueID: 3860135273
     locked: 0
   m_RenderingLayers:

@@ -180,9 +180,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 114
-        y: 5
+        y: 4
         width: 48
-        height: 113
+        height: 114
       alignment: 9
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -369,6 +369,28 @@ TextureImporter:
       bones: []
       spriteID: 28007894d27f43248821de801bc6027b
       internalID: 477524566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Temple_2
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 4
+        width: 13
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11cabc9317cb63045aa54789c5782ab0
+      internalID: 1206781556
       vertices: []
       indices: 
       edges: []

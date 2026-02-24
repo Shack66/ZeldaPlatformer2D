@@ -50,16 +50,6 @@ public class ParallaxEffect : MonoBehaviour
         // Calculate how much the background has moved for the looping effect
         float temp = (cam.transform.position.x * (1 - parallaxFactor));
 
-        // Infinite loop's logic
-        if (temp > startingPosition.x + length)
-        {
-            startingPosition.x += length; // If it came out on the right, move the anchor to the right 
-        }
-        else if (temp < startingPosition.x - length)
-        {
-            startingPosition.x -= length; // If it came out on the left, move the anchor to the left 
-        }
-
         // Distance that the camera has moved from the starting position of the parallax object
         camMoveSinceStart = (Vector2)cam.transform.position - startingPosition;
 
