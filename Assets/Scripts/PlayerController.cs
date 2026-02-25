@@ -2,12 +2,14 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
     public float runSpeed = 10.3f;
+    public float jumpImpulse = 10f;
     Vector2 moveInput;
+    TouchingDirections touchingDirections;
 
     public float CurrentMoveSpeed
     {
@@ -61,18 +63,19 @@ public class PlayerController : MonoBehaviour
         } 
     }
 
-    public bool _isFacingLeft = true;
+    public bool _isFacingRight = true;
 
-    public bool IsFacingLeft { get { return _isFacingLeft; } private set {
+    public bool IsFacingRight { get { return _isFacingRight; } private set {
             // Flip only if value is new
-            if (_isFacingLeft != value)
+            if (_isFacingRight != value)
             {
                 // Flip the local scale to make the player face the opposite direction
                 transform.localScale *= new Vector2 (-1, 1);
             }
 
-            _isFacingLeft = value;
+            _isFacingRight = value;
         } }
+
 
     Rigidbody2D rb;
     Animator animator;
@@ -80,23 +83,15 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = rb.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+        touchingDirections = GetComponent<TouchingDirections>();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
+
+        animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -110,20 +105,20 @@ public class PlayerController : MonoBehaviour
 
     private void SetFacingDirection(Vector2 moveInput)
     {
-        if (moveInput.x < 0 && IsFacingLeft)
+        if (moveInput.x < 0 && IsFacingRight)
         {
             // Face the left
-            IsFacingLeft = false;
+            IsFacingRight = false;
         }
-        else if (moveInput.x > 0 && !IsFacingLeft)
+        else if (moveInput.x > 0 && !IsFacingRight)
         {
             // Face the right
-            IsFacingLeft = true; 
+            IsFacingRight = true; 
         }
 
         }
 
-    public void onRun(InputAction.CallbackContext context)
+    public void OnRun(InputAction.CallbackContext context)
     {
         if (context.started)
         {
@@ -134,4 +129,15 @@ public class PlayerController : MonoBehaviour
             IsRunning = false;
         }
     }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        // TODO: Check "if alive" as well
+        if (context.started && touchingDirections.IsGrounded)
+        {
+            animator.SetTrigger(AnimationStrings.jump); // animation change
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulse); // physics change
+        }
+
+}
 }
