@@ -173,7 +173,7 @@ MonoBehaviour:
   jumpImpulse: 10
   _isMoving: 0
   _isRunning: 0
-  _isFacingRight: 1
+  _isFacingLeft: 1
 --- !u!114 &6541450559734880651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,8 +310,4 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   groundDistance: 0.05
-  wallDistance: 0.2
-  ceilingDistance: 0.05
   _isGrounded: 0
-  _isOnWall: 0
-  _isOnCeiling: 0
