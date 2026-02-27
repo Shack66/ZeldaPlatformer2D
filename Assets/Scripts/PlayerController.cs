@@ -5,58 +5,71 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 public class PlayerController : MonoBehaviour
 {
+    // MOVEMENT STATS
     // On-the-Floor Speed
     public float walkSpeed = 7f;
     public float runSpeed = 13f;
 
     // On-the-Air Speed
     public float airWalkSpeed = 7f;
-    public float airRunSpeed = 8f;
-    private bool _isAirRunning;
+    public float airRunSpeed = 10f;
+    private bool _isAirRunning; // Tracks if the jump started while running to preserve momentum
 
-    // Jump impulse
+    // JUMP IMPULSES (Different heights and speeds based on current state)
     public float runJumpImpulse = 18f;
     public float walkJumpImpulse = 15f;
     public float idleJumpImpulse = 14f;
 
+    // GAME FEEL: Jump Cut (for short hops) and Gravity (for heavy falls)
     private float jumpCutMultiplier = 0.5f;
     public float fallGravityMultiplier = 1.3f;
     private float defaultGravityScale;
 
-    // Coyote Time
+    // GAME FEEL: Coyote Time (Grace period to jump after falling off an edge)
     public float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
 
-    public float airMomentumMultiplier = 1.2f; // Boost variable
+    // GAME FEEL: Momentum (Extra push in the air to make jumps wider), also called "Boost"
+    public float airMomentumMultiplier = 1.2f;
 
-    // JumpBuffer
+    // GAME FEEL: JumpBuffer (Remembers jump input right before landing)
     public float jumpBufferTime = 0.15f;
     private float jumpBufferCounter;
 
-    // Smoothing
+    // GAME FEEL: Smoothing (How fast the character reaches the target speed)
     public float lerpSpeed = 10f;
+
+    // Tracks previous frame state to detect exact landing moments
+    private bool _wasGrounded;
 
     Vector2 moveInput;
     TouchingDirections touchingDirections;
+    Rigidbody2D rb;
+    Animator animator;
 
+    // Calculates the exact speed the player should have right now
     public float CurrentMoveSpeed
     {
         get
         {
-            // 1. Base case: Stilled or Blocked 
-            if (!IsMoving || touchingDirections.IsOnWall) return 0;
+            // 1. Base case: Stilled or Blocked by a Wall
+            if (!IsMoving || touchingDirections.IsOnWall)
+            {
+                return 0;
+            }
 
-            // 2. Air Case
+            // 2. Air Case: If running, apply the momentum multiplier for a longer jump
             if (!touchingDirections.IsGrounded)
             {
                 return _isAirRunning ? airRunSpeed * airMomentumMultiplier : airWalkSpeed;
             }
 
-            // 3. Floor Case 
+            // 3. Floor Case: Normal running or walking
             return IsRunning ? runSpeed : walkSpeed;
         }
     }
 
+    // Calculates how much force to apply to the jump based on horizontal speed
     public float CurrentJumpImpulse
     {
         get
@@ -82,10 +95,12 @@ public class PlayerController : MonoBehaviour
 
     public bool IsMoving
     {
-        get { return _isMoving; } // When someone asks if it's moving (the public property is going to return the private variable whenever "IsMoving get" is called)
+        get { return _isMoving; } // When it's asked if it's moving (the public property is going to return the private variable whenever "IsMoving get" is called)
         private set
         {
             _isMoving = value; // Update the value
+            // Automatically updates the Animator whenever the value changes. 
+            // No need to call this manually everywhere.
             animator.SetBool(AnimationStrings.isMoving, value); // Here the animator is warned (whenever "isMoving" is set, like "OnMove", it's also going to be setting the parameter on the animator)
         }
     }
@@ -124,9 +139,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    Rigidbody2D rb;
-    Animator animator;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -138,50 +150,61 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // 1. Horizontal Speed Management 
-        // Calculate where we want to get
+        // 1. HORIZONTAL SPEED MANAGEMENT (Lerp) 
+        // Calculate the theoretical target speed
         float targetVelocity = moveInput.x * CurrentMoveSpeed;
 
         // Smoothing current velocity toward target velocity
         float lerpSpeed = touchingDirections.IsGrounded ? 8f : 5f; // More grip on the ground, more inertia in the air
+
+        // Smoothly transition from current speed to target speed
         float newXVelocity = Mathf.Lerp(rb.linearVelocity.x, targetVelocity, Time.fixedDeltaTime * lerpSpeed);
 
         rb.linearVelocity = new Vector2(newXVelocity, rb.linearVelocity.y);
-        
-        // 2. Animation and Counters
+
+        // 2. ANIMATION AND COUNTERS
+        // Tell the animator how fast Link is falling/rising
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y);
 
-        jumpBufferCounter -= Time.fixedDeltaTime; // Rest the time to the counters at the beginning of the frame
+        // Rest the time to the counters at the beginning of the frame
+        jumpBufferCounter -= Time.fixedDeltaTime; 
 
         if (touchingDirections.IsGrounded)
         {
+            // Refill Coyote Time when on the floor
             coyoteTimeCounter = coyoteTime;
-            _isAirRunning = false;
+            _isAirRunning = false; // Reset the air momentum flag
         }
         else
         {
+            // Tick down Coyote Time when falling
             coyoteTimeCounter -= Time.fixedDeltaTime;
         }
 
-        // 3.Jump Logic (Jump Buffer + Coyote Time)
+        // 3.JUMP LOGIC (Jump Buffer + Coyote Time)
         if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
         {
             // Execute Jump
             animator.SetTrigger(AnimationStrings.jump);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, CurrentJumpImpulse);
+
+            // Save if Link was running when the jump started for the momentum boost
             _isAirRunning = IsRunning;
 
-            // Reset the counters so that the jump is not repeated
+            // Reset the counters to prevent double jumping
             jumpBufferCounter = 0f;
             coyoteTimeCounter = 0f;
         }
 
-        // 4. Ceiling Colision
+        // 4. CEILING COLLISION (Anti-Stick)
+        // If hitting a ceiling (or a platform that is above Link) while moving up, push down slightly to kill upward momentum
         if (touchingDirections.IsOnCeiling && rb.linearVelocity.y > 0)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -2f);
         }
 
+        // 5. DYNAMIC GRAVITY
+        // Make the character fall faster than they rise for a dynamic/agile feel
         if (rb.linearVelocity.y < 0)
         {
             rb.gravityScale = defaultGravityScale * fallGravityMultiplier;
@@ -191,18 +214,24 @@ public class PlayerController : MonoBehaviour
             rb.gravityScale = defaultGravityScale;
         }
 
-
+        // 6. STATE TRACKING
+        // Save current grounded state for the next frame
+        _wasGrounded = touchingDirections.IsGrounded;
     }
 
+    // Triggered by Left Stick or WASD/Arrows
     public void OnMove(InputAction.CallbackContext context)
     {
+        // Read the direction (-1 to 1)
         moveInput = context.ReadValue<Vector2>();
 
+        // If input is not exactly (0,0), we are moving
         IsMoving = moveInput != Vector2.zero;
 
         SetFacingDirection(moveInput);
     }
 
+    // Extracted logic to keep OnMove clean
     private void SetFacingDirection(Vector2 moveInput)
     {
         if (moveInput.x < 0 && IsFacingRight)
@@ -218,6 +247,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    // Triggered by the Run button (Shift or Button West)
     public void OnRun(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -230,15 +260,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Triggered by the Jump button (Space or Button South)
     public void OnJump(InputAction.CallbackContext context)
     {
         // TODO: Check if alive as well
-        if (context.started && coyoteTimeCounter > 0f)
+        if (context.started)
         {
-            jumpBufferCounter = jumpBufferTime; // The player wants to jump
+            // The player wants to jump, so the desire to jump is saved.
+            // FixedUpdate will execute it when it's physically safe.
+            jumpBufferCounter = jumpBufferTime; 
         }
         else if (context.canceled)
         {
+            // Variable Jump Height: If the button is released while still moving UP, instantly cut the upward speed in half.
             if (rb.linearVelocity.y > 0)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * jumpCutMultiplier);
