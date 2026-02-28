@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7536116204466495079}
   - component: {fileID: 6541450559734880651}
   - component: {fileID: 5041964151096177038}
+  - component: {fileID: 1412996571405603454}
   m_Layer: 0
   m_Name: Link
   m_TagString: Untagged
@@ -167,9 +168,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33bffbb26ec95c9498d36257881b6f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  walkspeed: 5
+  walkSpeed: 5
+  runSpeed: 10.3
+  jumpImpulse: 10
   _isMoving: 0
   _isRunning: 0
+  _isFacingLeft: 1
 --- !u!114 &6541450559734880651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +223,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7536116204466495079}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: onRun
+        m_MethodName: OnRun
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -231,6 +235,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c6596356-6be4-4fc6-b7f9-40a64491e26b
     m_ActionName: 'Player/Run[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7536116204466495079}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ac3ee26d-185a-4e9f-b983-4ac0c78bbe07
+    m_ActionName: 'Player/Jump[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -263,3 +283,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1412996571405603454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5685651245882975585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb21829929d221b48a08e8cf571524fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  castFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  groundDistance: 0.05
+  _isGrounded: 0
