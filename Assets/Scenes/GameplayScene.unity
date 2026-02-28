@@ -5252,7 +5252,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -45.8, y: 0.9880004, z: -9}
+  m_LocalPosition: {x: -35.72009, y: 0.9880004, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9765,7 +9765,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 557891217}
   - {fileID: 1008678018}
@@ -16178,7 +16178,7 @@ Transform:
   m_GameObject: {fileID: 1663001267}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -45.8, y: 0.9880004, z: -9}
+  m_LocalPosition: {x: -35.72009, y: 0.9880004, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16265,7 +16265,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 430}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1005900587}
   - {fileID: 876846145}
@@ -20306,8 +20306,8 @@ Tilemap:
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -8, y: -8, z: 0}
-  m_Size: {x: 476, y: 20, z: 1}
+  m_Origin: {x: -73, y: -15, z: 0}
+  m_Size: {x: 541, y: 27, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -21371,7 +21371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3171406578781367908, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -45.8
+      value: -35.72009
       objectReference: {fileID: 0}
     - target: {fileID: 3171406578781367908, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
       propertyPath: m_LocalPosition.y

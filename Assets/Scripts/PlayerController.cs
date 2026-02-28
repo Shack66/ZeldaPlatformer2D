@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private float defaultGravityScale;
 
     // GAME FEEL: Coyote Time (Grace period to jump after falling off an edge)
-    public float coyoteTime = 0.2f;
+    public float coyoteTime = 0.1f;
     private float coyoteTimeCounter;
 
     // GAME FEEL: Momentum (Extra push in the air to make jumps wider), also called "Boost"
@@ -41,6 +42,9 @@ public class PlayerController : MonoBehaviour
 
     // Tracks previous frame state to detect exact landing moments
     private bool _wasGrounded;
+
+    private float _airYVelocity;
+    private float _airXVelocity;
 
     Vector2 moveInput;
     TouchingDirections touchingDirections;
@@ -155,14 +159,49 @@ public class PlayerController : MonoBehaviour
         float targetVelocity = moveInput.x * CurrentMoveSpeed;
 
         // Smoothing current velocity toward target velocity
-        float lerpSpeed = touchingDirections.IsGrounded ? 8f : 5f; // More grip on the ground, more inertia in the air
+        float currentLerpSpeed = 8f;
 
-        // Smoothly transition from current speed to target speed
-        float newXVelocity = Mathf.Lerp(rb.linearVelocity.x, targetVelocity, Time.fixedDeltaTime * lerpSpeed);
+        // Check if Link is trying to reverse direction (Directional Snap)
+        bool isChangingDirection = (moveInput.x > 0 && rb.linearVelocity.x < 0) || (moveInput.x < 0 && rb.linearVelocity.x > 0);
 
+        if (touchingDirections.IsGrounded)
+        {
+            if (isChangingDirection)
+            {
+                // Instant snap when switching directions
+                currentLerpSpeed = 25f;
+            }
+            else if (moveInput.x == 0)
+            {
+                float speedMagnitude = Mathf.Abs(rb.linearVelocity.x);
+
+                if (speedMagnitude < 5f) // if Link is Walking
+                {
+                    currentLerpSpeed = 20f; // Instantly stops
+                }
+                else // if Link is in Run
+                {
+                    currentLerpSpeed = 2f;  // He slides a little
+                }
+            }
+            else
+            {
+                currentLerpSpeed = 12f; // Standard ground traction
+            }
+        }
+        else
+        {
+            currentLerpSpeed = 3f; // Air momentum
+        }
+
+        // Apply horizontal force smoothly
+        float newXVelocity = Mathf.Lerp(rb.linearVelocity.x, targetVelocity, Time.fixedDeltaTime * currentLerpSpeed);
         rb.linearVelocity = new Vector2(newXVelocity, rb.linearVelocity.y);
 
         // 2. ANIMATION AND COUNTERS
+        // isMoving is updating based on input intent, not physical speed
+        animator.SetBool("isMoving", moveInput.x != 0);
+
         // Tell the animator how fast Link is falling/rising
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y);
 
@@ -184,9 +223,16 @@ public class PlayerController : MonoBehaviour
         // 3.JUMP LOGIC (Jump Buffer + Coyote Time)
         if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
         {
+            float finalJumpImpulse = CurrentJumpImpulse;
+
+            if (!touchingDirections.IsGrounded)
+            {
+                finalJumpImpulse *= 0.75f; // The jump is reduced by 25% if the jump is a "coyote" jump
+            }
+
             // Execute Jump
             animator.SetTrigger(AnimationStrings.jump);
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, CurrentJumpImpulse);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, finalJumpImpulse);
 
             // Save if Link was running when the jump started for the momentum boost
             _isAirRunning = IsRunning;
@@ -203,7 +249,18 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -2f);
         }
 
-        // 5. DYNAMIC GRAVITY
+        // 5. LANDING DETECTION (Smart Landing)
+        // Check if we just touched the ground this frame
+        if (!_wasGrounded && touchingDirections.IsGrounded)
+        {
+            // The Landing Animation is only only activated if the fall is really high.
+            if (_airYVelocity < -25f)
+            {
+                animator.SetTrigger("landingTrigger");
+            }
+        }
+
+        // 6. DYNAMIC GRAVITY
         // Make the character fall faster than they rise for a dynamic/agile feel
         if (rb.linearVelocity.y < 0)
         {
@@ -214,9 +271,22 @@ public class PlayerController : MonoBehaviour
             rb.gravityScale = defaultGravityScale;
         }
 
-        // 6. STATE TRACKING
-        // Save current grounded state for the next frame
+        // 7. STATE TRACKING
+        // Keep track of vertical speed while in the air
+        if (!touchingDirections.IsGrounded)
+        {
+            _airYVelocity = rb.linearVelocity.y;
+            _airXVelocity = rb.linearVelocity.x;
+        }
+        else
+        {
+            _airYVelocity = 0;
+            _airXVelocity = 0;
+        }
+
+        // Save current state for next frame's comparison
         _wasGrounded = touchingDirections.IsGrounded;
+
     }
 
     // Triggered by Left Stick or WASD/Arrows
