@@ -56,20 +56,28 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            // 1. Base case: Stilled or Blocked by a Wall
-            if (!IsMoving || touchingDirections.IsOnWall)
+            if (CanMove)
             {
+                // 1. Base case: Stilled or Blocked by a Wall
+                if (!IsMoving || touchingDirections.IsOnWall)
+                {
+                    return 0;
+                }
+
+                // 2. Air Case: If running, apply the momentum multiplier for a longer jump
+                if (!touchingDirections.IsGrounded)
+                {
+                    return _isAirRunning ? airRunSpeed * airMomentumMultiplier : airWalkSpeed;
+                }
+
+                // 3. Floor Case: Normal running or walking
+                return IsRunning ? runSpeed : walkSpeed;
+            }
+            else
+            {
+                // Movement locked
                 return 0;
             }
-
-            // 2. Air Case: If running, apply the momentum multiplier for a longer jump
-            if (!touchingDirections.IsGrounded)
-            {
-                return _isAirRunning ? airRunSpeed * airMomentumMultiplier : airWalkSpeed;
-            }
-
-            // 3. Floor Case: Normal running or walking
-            return IsRunning ? runSpeed : walkSpeed;
         }
     }
 
@@ -143,6 +151,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public bool CanMove { get
+        {
+            return animator.GetBool(AnimationStrings.canMove);
+        } }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -150,7 +163,7 @@ public class PlayerController : MonoBehaviour
         touchingDirections = GetComponent<TouchingDirections>();
 
         defaultGravityScale = rb.gravityScale;
-}
+    }
 
     private void FixedUpdate()
     {
@@ -206,7 +219,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y);
 
         // Rest the time to the counters at the beginning of the frame
-        jumpBufferCounter -= Time.fixedDeltaTime; 
+        jumpBufferCounter -= Time.fixedDeltaTime;
 
         if (touchingDirections.IsGrounded)
         {
@@ -231,7 +244,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // Execute Jump
-            animator.SetTrigger(AnimationStrings.jump);
+            animator.SetTrigger(AnimationStrings.jumpTrigger);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, finalJumpImpulse);
 
             // Save if Link was running when the jump started for the momentum boost
@@ -256,7 +269,7 @@ public class PlayerController : MonoBehaviour
             // The Landing Animation is only only activated if the fall is really high.
             if (_airYVelocity < -25f)
             {
-                animator.SetTrigger("landingTrigger");
+                animator.SetTrigger(AnimationStrings.landingTrigger);
             }
         }
 
@@ -334,11 +347,11 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         // TODO: Check if alive as well
-        if (context.started)
+        if (context.started && CanMove)
         {
             // The player wants to jump, so the desire to jump is saved.
             // FixedUpdate will execute it when it's physically safe.
-            jumpBufferCounter = jumpBufferTime; 
+            jumpBufferCounter = jumpBufferTime;
         }
         else if (context.canceled)
         {
@@ -347,6 +360,15 @@ public class PlayerController : MonoBehaviour
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * jumpCutMultiplier);
             }
+        }
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        // Check: This will maybe be for air attacks as well
+        if (context.started)
+        {
+            animator.SetTrigger(AnimationStrings.attackTrigger);
         }
     }
 }
