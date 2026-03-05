@@ -7,41 +7,76 @@ using UnityEngine;
 public class Darknut : MonoBehaviour
 {
 
-    public float walkSpeed = 3f;
+    public float walkSpeed = 1f;
+    public float walkStopRate = 0.002f;
+    public DetectionZone attackZone;
 
     Rigidbody2D rb;
     TouchingDirections touchingDirections;
+    Animator animator;
 
     public enum WalkableDirection { Left, Right }
 
-    private WalkableDirection _walkDirection;
+    private WalkableDirection _walkDirection = WalkableDirection.Left;
     private Vector2 walkDirectionVector = Vector2.left;
 
     public WalkableDirection WalkDirection
     { 
         get { return _walkDirection; } 
-        set { 
-            if (_walkDirection != value) 
+        set {
+            if (_walkDirection == WalkableDirection.Right)
             {
-                // Direction flipped
-                gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y);
-
-                if (value == WalkableDirection.Right)
-                {
-                    walkDirectionVector = Vector2.right;
-                } else if (value == WalkableDirection.Left)
-                {
-                    walkDirectionVector = Vector2.left;
-                }
+                walkDirectionVector = Vector2.right;
+                transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
             }
-            
+            else if (_walkDirection == WalkableDirection.Left)
+            {
+                walkDirectionVector = Vector2.left;
+                transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+            }
             _walkDirection = value; }
-    }    
+    }
+
+    public bool _hasTarget = false;
+    
+    public bool HasTarget { 
+        get { return _hasTarget; } 
+        private set
+        {
+            _hasTarget = value;
+            animator.SetBool(AnimationStrings.hasTarget, value);
+        }
+    }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         touchingDirections = GetComponent<TouchingDirections>();
+        animator = GetComponent<Animator>();
+
+        if (transform.localScale.x > 0)
+        {
+            _walkDirection = WalkableDirection.Right;
+            walkDirectionVector = Vector2.right;
+        }
+        else
+        {
+            _walkDirection = WalkableDirection.Left;
+            walkDirectionVector = Vector2.left;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        HasTarget = attackZone.detectedColliders.Count > 0;
+    }
+
+    public bool CanMove
+    {  get
+        {
+            return animator.GetBool(AnimationStrings.canMove);
+        } 
     }
 
     private void FixedUpdate()
@@ -51,7 +86,15 @@ public class Darknut : MonoBehaviour
             FlipDirection();
         }
 
-        rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocity.y);
+        if (CanMove)
+        {
+            rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocity.y);
+        }
+        else
+        {
+            rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, walkStopRate), rb.linearVelocity.y);
+        }
+        
     }
 
     private void FlipDirection()
@@ -70,15 +113,9 @@ public class Darknut : MonoBehaviour
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-
+        WalkDirection = WalkableDirection.Left;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
