@@ -151,10 +151,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool CanMove { get
+    public bool CanMove { 
+        get
         {
             return animator.GetBool(AnimationStrings.canMove);
-        } }
+        } 
+    }
+
+    public bool IsAlive {
+        get
+        {
+            return animator.GetBool(AnimationStrings.isAlive);
+        }
+    }
 
     private void Awake()
     {
@@ -308,10 +317,17 @@ public class PlayerController : MonoBehaviour
         // Read the direction (-1 to 1)
         moveInput = context.ReadValue<Vector2>();
 
-        // If input is not exactly (0,0), we are moving
-        IsMoving = moveInput != Vector2.zero;
+        if (IsAlive)
+        {
+            // If input is not exactly (0,0), we are moving
+            IsMoving = moveInput != Vector2.zero;
 
-        SetFacingDirection(moveInput);
+            SetFacingDirection(moveInput);
+        }
+        else
+        {
+            IsMoving = false;
+        }
     }
 
     // Extracted logic to keep OnMove clean

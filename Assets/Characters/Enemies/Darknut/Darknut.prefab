@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1430427141489181027}
   - component: {fileID: 8939970009850428591}
   - component: {fileID: 400669966706111956}
+  - component: {fileID: 6578662147140160358}
   m_Layer: 8
   m_Name: Darknut
   m_TagString: Untagged
@@ -231,6 +232,19 @@ MonoBehaviour:
   walkStopRate: 0.05
   attackZone: {fileID: 5272622531387718995}
   _hasTarget: 0
+--- !u!114 &6578662147140160358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2849958121673650458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a65f415d15e146e4099c8e305226c9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  _maxHealth: 100
 --- !u!1 &6582144261576609816
 GameObject:
   m_ObjectHideFlags: 0
