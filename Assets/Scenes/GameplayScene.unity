@@ -12619,6 +12619,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1196620292 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 400669966706111956, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
+  m_PrefabInstance: {fileID: 6318192937918674661}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75055e187370a8d47887e1f35a3cb163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Darknut
 --- !u!1001 &1205424782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21369,6 +21380,10 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: -0.01202783
       objectReference: {fileID: 0}
+    - target: {fileID: 905259181280512150, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3171406578781367908, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35.72009
@@ -21409,9 +21424,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5671038552745597820, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
+      propertyPath: invincibilityTime
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 5685651245882975585, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
       propertyPath: m_Name
       value: Link
+      objectReference: {fileID: 0}
+    - target: {fileID: 6187519157803296762, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
+      propertyPath: knockback.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6187519157803296762, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
+      propertyPath: knockback.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6541450559734880651, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
       propertyPath: m_ActionEvents.Array.size
@@ -21567,6 +21594,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 301037378742908058, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
+      propertyPath: knockback.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 301037378742908058, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
+      propertyPath: knockback.y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 400669966706111956, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
       propertyPath: walkStopRate
       value: 0.002
@@ -21574,6 +21609,38 @@ PrefabInstance:
     - target: {fileID: 2849958121673650458, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
       propertyPath: m_Name
       value: Darknut
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031955968278452954, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
+      propertyPath: knockback.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031955968278452954, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
+      propertyPath: knockback.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6578662147140160358, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
+      propertyPath: damageableHit.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6578662147140160358, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
+      propertyPath: damageableHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1196620292}
+    - target: {fileID: 6578662147140160358, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
+      propertyPath: damageableHit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6578662147140160358, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
+      propertyPath: damageableHit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6578662147140160358, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
+      propertyPath: damageableHit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Darknut, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6578662147140160358, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
+      propertyPath: damageableHit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8406933996065027467, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
       propertyPath: m_Size.x

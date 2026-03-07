@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable))]
 public class PlayerController : MonoBehaviour
 {
     // MOVEMENT STATS
@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     TouchingDirections touchingDirections;
     Rigidbody2D rb;
     Animator animator;
+    Damageable damageable;
 
     // Calculates the exact speed the player should have right now
     public float CurrentMoveSpeed
@@ -170,6 +171,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirections = GetComponent<TouchingDirections>();
+        damageable = GetComponent<Damageable>();
 
         defaultGravityScale = rb.gravityScale;
     }
@@ -216,9 +218,12 @@ public class PlayerController : MonoBehaviour
             currentLerpSpeed = 3f; // Air momentum
         }
 
-        // Apply horizontal force smoothly
-        float newXVelocity = Mathf.Lerp(rb.linearVelocity.x, targetVelocity, Time.fixedDeltaTime * currentLerpSpeed);
-        rb.linearVelocity = new Vector2(newXVelocity, rb.linearVelocity.y);
+        if (!damageable.LockVelocity)
+        {
+            // Apply horizontal force smoothly
+            float newXVelocity = Mathf.Lerp(rb.linearVelocity.x, targetVelocity, Time.fixedDeltaTime * currentLerpSpeed);
+            rb.linearVelocity = new Vector2(newXVelocity, rb.linearVelocity.y);
+        }
 
         // 2. ANIMATION AND COUNTERS
         // isMoving is updating based on input intent, not physical speed
@@ -386,5 +391,10 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
         }
+    }
+
+    public void OnHit(int damage, Vector2 knockback)
+    {
+        rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
     }
 }
