@@ -25,4 +25,5 @@ internal class AnimationStrings
     internal static string getUp = "getUp";
     internal static string strongHit = "strongHit";
     internal static string hit = "hit";
+    internal static string attackCooldown = "attackCooldown";
 }

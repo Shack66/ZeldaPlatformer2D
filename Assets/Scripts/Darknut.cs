@@ -10,6 +10,7 @@ public class Darknut : MonoBehaviour
     public float walkSpeed = 1f;
     public float walkStopRate = 0.002f;
     public DetectionZone attackZone;
+    public DetectionZone cliffDetectionZone;
 
     Rigidbody2D rb;
     TouchingDirections touchingDirections;
@@ -25,17 +26,18 @@ public class Darknut : MonoBehaviour
     { 
         get { return _walkDirection; } 
         set {
-            if (_walkDirection == WalkableDirection.Right)
+            if (value == WalkableDirection.Right)
             {
                 walkDirectionVector = Vector2.right;
-                transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
-            }
-            else if (_walkDirection == WalkableDirection.Left)
-            {
-                walkDirectionVector = Vector2.left;
                 transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
             }
-            _walkDirection = value; }
+            else if (value == WalkableDirection.Left)
+            {
+                walkDirectionVector = Vector2.left;
+                transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
+            }
+            _walkDirection = value; 
+        }
     }
 
     public bool _hasTarget = false;
@@ -49,6 +51,27 @@ public class Darknut : MonoBehaviour
         }
     }
 
+    public bool CanMove
+    {
+        get
+        {
+            return animator.GetBool(AnimationStrings.canMove);
+        }
+    }
+
+    public float AttackCooldown 
+    {
+        get
+        {
+            return animator.GetFloat(AnimationStrings.attackCooldown);
+        }
+        private set
+        {
+            animator.SetFloat(AnimationStrings.attackCooldown, Mathf.Max(value, 0));
+        }
+    }
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -58,13 +81,11 @@ public class Darknut : MonoBehaviour
 
         if (transform.localScale.x > 0)
         {
-            _walkDirection = WalkableDirection.Right;
-            walkDirectionVector = Vector2.right;
+            WalkDirection = WalkableDirection.Right;
         }
         else
         {
-            _walkDirection = WalkableDirection.Left;
-            walkDirectionVector = Vector2.left;
+            WalkDirection = WalkableDirection.Left;
         }
     }
 
@@ -72,22 +93,15 @@ public class Darknut : MonoBehaviour
     void Update()
     {
         HasTarget = attackZone.detectedColliders.Count > 0;
-    }
 
-    public bool CanMove
-    {  get
+        if (AttackCooldown > 0)
         {
-            return animator.GetBool(AnimationStrings.canMove);
-        } 
+            AttackCooldown -= Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (touchingDirections.IsGrounded && touchingDirections.IsOnWall)
-        {
-            FlipDirection();
-        }
-
         if (!damageable.LockVelocity)
         {
             if (CanMove)
@@ -98,6 +112,11 @@ public class Darknut : MonoBehaviour
             {
                 rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, walkStopRate), rb.linearVelocity.y);
             }
+        }
+
+        if (touchingDirections.IsGrounded && touchingDirections.IsOnWall && CanMove)
+        {
+            FlipDirection();
         }
     }
 
@@ -117,13 +136,16 @@ public class Darknut : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        WalkDirection = WalkableDirection.Left;
-    }
-
     public void OnHit(int damage, Vector2 knockback)
     {
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+    }
+
+    public void OnCliffDetected()
+    {
+        if (touchingDirections.IsGrounded)
+        {
+            FlipDirection();
+        }
     }
 }
