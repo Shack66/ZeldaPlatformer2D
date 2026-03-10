@@ -47,10 +47,10 @@ public class Damageable : MonoBehaviour
     private bool _isAlive = true;
 
     [SerializeField]
-    private bool isInvicible = false;
+    public bool isInvincible = false;
 
     private float timeSinceHit = 0;
-    public float invincibilityTime = 0.25f;
+    public float invincibilityTime = 0.5f;
 
     public bool IsAlive
     {
@@ -85,13 +85,14 @@ public class Damageable : MonoBehaviour
 
     private void Update()
     {
-        if (isInvicible)
+        if (isInvincible)
         {
             if (timeSinceHit > invincibilityTime)
             {
                 // Remove invincibility
-                isInvicible = false;
+                isInvincible = false;
                 timeSinceHit = 0;
+                invincibilityTime = 0.25f; // reset to default
             }
 
             timeSinceHit += Time.deltaTime;
@@ -100,10 +101,10 @@ public class Damageable : MonoBehaviour
 
     public bool Hit(int damage, Vector2 knockback)
     {
-        if (IsAlive && !isInvicible)
+        if (IsAlive && !isInvincible)
         {
             Health -= damage;
-            isInvicible = true;
+            isInvincible = true;
 
             // Notify other suscribed components that the damageable was hit to handle the knockback and such
             animator.SetTrigger(AnimationStrings.hitTrigger);
@@ -115,5 +116,12 @@ public class Damageable : MonoBehaviour
 
         // Unable to be hit
         return false;
+    }
+
+    public void StartLongInvincibility(float duration)
+    {
+        isInvincible = true;
+        invincibilityTime = duration; // Cambiamos el tiempo a 3s temporalmente
+        timeSinceHit = 0;
     }
 }
