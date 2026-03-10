@@ -2,8 +2,9 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Audio.GeneratorInstance;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable))]
 public class PlayerController : MonoBehaviour
 {
     // MOVEMENT STATS
@@ -46,10 +47,17 @@ public class PlayerController : MonoBehaviour
     private float _airYVelocity;
     private float _airXVelocity;
 
+    [Header("Combat Settings")]
+    public float minimumFloorTime = 0.2f; // Min time before Link can get up
+    private float timeOnFloor = 0f;
+
+    private bool _attackBuffered = false;
+
     Vector2 moveInput;
     TouchingDirections touchingDirections;
     Rigidbody2D rb;
     Animator animator;
+    Damageable damageable;
 
     // Calculates the exact speed the player should have right now
     public float CurrentMoveSpeed
@@ -151,16 +159,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool CanMove { get
+    public bool CanMove { 
+        get
         {
             return animator.GetBool(AnimationStrings.canMove);
-        } }
+        } 
+    }
+
+    public bool IsAlive {
+        get
+        {
+            return animator.GetBool(AnimationStrings.isAlive);
+        }
+    }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirections = GetComponent<TouchingDirections>();
+        damageable = GetComponent<Damageable>();
 
         defaultGravityScale = rb.gravityScale;
     }
@@ -207,16 +225,30 @@ public class PlayerController : MonoBehaviour
             currentLerpSpeed = 3f; // Air momentum
         }
 
-        // Apply horizontal force smoothly
-        float newXVelocity = Mathf.Lerp(rb.linearVelocity.x, targetVelocity, Time.fixedDeltaTime * currentLerpSpeed);
-        rb.linearVelocity = new Vector2(newXVelocity, rb.linearVelocity.y);
+        if (!damageable.LockVelocity)
+        {
+            // Apply horizontal force smoothly
+            float newXVelocity = Mathf.Lerp(rb.linearVelocity.x, targetVelocity, Time.fixedDeltaTime * currentLerpSpeed);
+            rb.linearVelocity = new Vector2(newXVelocity, rb.linearVelocity.y);
+        }
+        else if (touchingDirections.IsGrounded)
+        {
+            // If Link dies, he stops quickly
+            float slideFriction = 5f; // makes Link stop in about 0.5 seconds
+            float newXVelocity = Mathf.Lerp(rb.linearVelocity.x, 0, Time.fixedDeltaTime * slideFriction);
+            rb.linearVelocity = new Vector2(newXVelocity, rb.linearVelocity.y);
+        }
 
         // 2. ANIMATION AND COUNTERS
         // isMoving is updating based on input intent, not physical speed
-        animator.SetBool("isMoving", moveInput.x != 0);
+        animator.SetBool(AnimationStrings.isMoving, moveInput.x != 0);
 
         // Tell the animator how fast Link is falling/rising
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y);
+
+        // Absolute value of the velocity on X for the Blend Tree
+        // Mathf.Abs so that the value is always positive (walking to the left is negative velocity)
+        animator.SetFloat(AnimationStrings.xVelocity, Mathf.Abs(rb.linearVelocity.x));
 
         // Rest the time to the counters at the beginning of the frame
         jumpBufferCounter -= Time.fixedDeltaTime;
@@ -231,6 +263,16 @@ public class PlayerController : MonoBehaviour
         {
             // Tick down Coyote Time when falling
             coyoteTimeCounter -= Time.fixedDeltaTime;
+        }
+
+        // Check the stun duration
+        if (damageable.LockVelocity && touchingDirections.IsGrounded)
+        {
+            timeOnFloor += Time.deltaTime;
+        }
+        else
+        {
+            timeOnFloor = 0f; // It resets if Link gets up or is in the air
         }
 
         // 3.JUMP LOGIC (Jump Buffer + Coyote Time)
@@ -300,6 +342,31 @@ public class PlayerController : MonoBehaviour
         // Save current state for next frame's comparison
         _wasGrounded = touchingDirections.IsGrounded;
 
+        // 8. ATTACK AFTER GETTING UP (ATTACK BUFFERED)
+        // If there's a saved attack and Link is no longer physically blocked
+        if (_attackBuffered && !damageable.LockVelocity && CanMove)
+        {
+            animator.SetTrigger(AnimationStrings.attackTrigger); // then the attack is launched
+            _attackBuffered = false; // the buffer is cleaned for not attacking infinitely
+        }
+    }
+
+    private void Update()
+    {
+        // It's constantly ckecked if Link wants to move
+        if (IsAlive && CanMove)
+        {
+            // If input is not exactly (0,0), we are moving
+            IsMoving = moveInput != Vector2.zero;
+            if (IsMoving)
+            {
+                SetFacingDirection(moveInput);
+            }
+        }
+        else
+        {
+            IsMoving = false;
+        }
     }
 
     // Triggered by Left Stick or WASD/Arrows
@@ -308,10 +375,11 @@ public class PlayerController : MonoBehaviour
         // Read the direction (-1 to 1)
         moveInput = context.ReadValue<Vector2>();
 
-        // If input is not exactly (0,0), we are moving
-        IsMoving = moveInput != Vector2.zero;
-
-        SetFacingDirection(moveInput);
+        // If Link starts to move or is moving
+        if (context.started || context.performed)
+        {
+            TryGetUp();
+        }
     }
 
     // Extracted logic to keep OnMove clean
@@ -347,11 +415,18 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         // TODO: Check if alive as well
-        if (context.started && CanMove)
+        if (context.started)
         {
-            // The player wants to jump, so the desire to jump is saved.
-            // FixedUpdate will execute it when it's physically safe.
-            jumpBufferCounter = jumpBufferTime;
+            TryGetUp(); // First, Link tries to get up
+
+            // But if he can move, then he jumps normally
+            if (CanMove)
+            {
+                // The player wants to jump, so the desire to jump is saved.
+                // FixedUpdate will execute it when it's physically safe.
+                jumpBufferCounter = jumpBufferTime;
+
+            }
         }
         else if (context.canceled)
         {
@@ -368,7 +443,58 @@ public class PlayerController : MonoBehaviour
         // Check: This will maybe be for air attacks as well
         if (context.started)
         {
-            animator.SetTrigger(AnimationStrings.attackTrigger);
+            // If Link's on the floor (Link_OnFloor)
+            if (damageable.LockVelocity)
+            {
+                TryGetUp(); // then he getsup
+                _attackBuffered = true; // The intention to attack is saved for later
+            }
+            else if (CanMove) // If Link can move normally
+            {
+                _attackBuffered = false;
+                animator.SetTrigger(AnimationStrings.attackTrigger); // then he attacks (even if he's in a invincible state)
+            }
+        }
+    }
+
+    public void OnHit(int damage, Vector2 knockback)
+    {
+        // If Link's alive, knockback is applied
+        if (damageable.IsAlive)
+        {
+            rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+
+            // Check if it's a normal (hit) or strong hit (strongHit)
+
+            if (knockback.y > 5f || !touchingDirections.IsGrounded)
+            {
+                animator.SetTrigger(AnimationStrings.strongHit);
+                knockback.x = knockback.x - 2.25f;
+                knockback.y = knockback.y + 5f;
+            }
+            else
+            {
+                animator.SetTrigger(AnimationStrings.hit);
+            }
+        }
+        else
+        {
+            // If the hit killed him, then he stops quickly
+            rb.linearVelocity = Vector2.zero;
+        }
+    }
+
+    private void TryGetUp()
+    {
+        if (damageable.LockVelocity)
+        {
+            if (touchingDirections.IsGrounded)
+            {
+                if (timeOnFloor >= minimumFloorTime)
+                {
+                    animator.SetTrigger(AnimationStrings.getUp);
+                }
+            }
         }
     }
 }
