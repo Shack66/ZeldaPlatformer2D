@@ -148,4 +148,9 @@ public class Darknut : MonoBehaviour
             FlipDirection();
         }
     }
+
+    public void CheckForNextAttack()
+    {
+        animator.SetBool(AnimationStrings.shouldContinueAttack, HasTarget);
+    }
 }
