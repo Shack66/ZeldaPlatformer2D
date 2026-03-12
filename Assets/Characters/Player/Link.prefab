@@ -282,6 +282,7 @@ MonoBehaviour:
   airMomentumMultiplier: 1.2
   jumpBufferTime: 0.15
   lerpSpeed: 10
+  minimumFloorTime: 0.2
   _isMoving: 0
   _isRunning: 0
   _isFacingRight: 1
@@ -468,5 +469,8 @@ MonoBehaviour:
   _maxHealth: 100
   _health: 100
   _isAlive: 1
-  isInvicible: 0
+  isInvincible: 0
   invincibilityTime: 0.25
+  canBlock: 0
+  isFacingRight: 1
+  isStunned: 0

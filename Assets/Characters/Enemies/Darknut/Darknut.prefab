@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Attack
   attackDamage: 10
   knockback: {x: 0, y: 0}
+  shieldRecoil: {x: 15, y: 3}
 --- !u!1 &2849958121673650458
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,8 +376,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.078938484, y: -0.0014662147}
-  m_Size: {x: 0.24552536, y: 0.6686839}
+  m_Offset: {x: -0.05695641, y: -0.0014662147}
+  m_Size: {x: 0.298702, y: 0.6686839}
   m_Direction: 0
 --- !u!95 &1430427141489181027
 Animator:
@@ -469,6 +470,9 @@ MonoBehaviour:
   _isAlive: 1
   isInvincible: 0
   invincibilityTime: 0.25
+  canBlock: 1
+  isFacingRight: 1
+  isStunned: 0
 --- !u!1 &3860755759574639850
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   attackDamage: 10
   knockback: {x: 0, y: 0}
+  shieldRecoil: {x: 15, y: 3}
 --- !u!1 &6582144261576609816
 GameObject:
   m_ObjectHideFlags: 0
