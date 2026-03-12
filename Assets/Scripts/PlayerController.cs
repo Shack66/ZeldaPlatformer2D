@@ -153,6 +153,7 @@ public class PlayerController : MonoBehaviour
             {
                 // Flip the local scale to make the player face the opposite direction
                 transform.localScale *= new Vector2(-1, 1);
+                damageable.isFacingRight = value;
             }
 
             _isFacingRight = value;
@@ -233,8 +234,16 @@ public class PlayerController : MonoBehaviour
         }
         else if (touchingDirections.IsGrounded)
         {
-            // If Link dies, he stops quickly
-            float slideFriction = 5f; // makes Link stop in about 0.5 seconds
+            float slideFriction;
+            if (damageable.IsStunned)
+            {
+                slideFriction = 2f;
+            }
+            else
+            {
+                // If Link dies, he stops quickly
+                slideFriction = 5f; // makes Link stop in about 0.5 seconds
+            }
             float newXVelocity = Mathf.Lerp(rb.linearVelocity.x, 0, Time.fixedDeltaTime * slideFriction);
             rb.linearVelocity = new Vector2(newXVelocity, rb.linearVelocity.y);
         }
@@ -496,5 +505,10 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OnShieldBlock(Vector2 knockback)
+    {
+        rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
     }
 }

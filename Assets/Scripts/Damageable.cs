@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using static Darknut;
 
 public class Damageable : MonoBehaviour
 {
@@ -52,6 +53,16 @@ public class Damageable : MonoBehaviour
     private float timeSinceHit = 0;
     public float invincibilityTime = 0.5f;
 
+    [SerializeField]
+    public bool canBlock; // Only the Darknut can use his shield
+    public bool isFacingRight = true;
+
+    WalkableDirection WalkDirection;
+
+    public enum HitResult { Damage, Blocked, Missed }
+
+    public bool isStunned;
+
     public bool IsAlive
     {
         get
@@ -78,6 +89,14 @@ public class Damageable : MonoBehaviour
         }
     }
 
+    public bool IsStunned
+    {
+        get
+        {
+            return animator.GetBool(AnimationStrings.isStunned);
+        }
+    }
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -99,10 +118,25 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    public bool Hit(int damage, Vector2 knockback)
+    public HitResult Hit(int damage, Vector2 knockback, Vector2 attackerPos)
     {
         if (IsAlive && !isInvincible)
         {
+            float distanceX = attackerPos.x - transform.position.x;
+            bool attackerIsOnRight = distanceX > 0;
+
+            bool isBlockingPosition = (isFacingRight && attackerIsOnRight) || (!isFacingRight && !attackerIsOnRight);
+
+            if (canBlock && isBlockingPosition)
+            {
+                // If the Darknut's looking at the same direction that Link is, then his shield gets activated
+                OnShield();
+                return HitResult.Blocked;
+            }
+
+            // but if Link's behind the Darknut, then the Darknut takes the hit
+            // The character cannot block, so it takes the hit
+
             Health -= damage;
             isInvincible = true;
 
@@ -111,17 +145,24 @@ public class Damageable : MonoBehaviour
             LockVelocity = true;
             damageableHit?.Invoke(damage, knockback);
 
-            return true;
-        }
+            return HitResult.Damage;
 
+        }
         // Unable to be hit
-        return false;
+        return HitResult.Missed;
+    }
+
+    public void OnShield()
+    {
+        animator.SetTrigger(AnimationStrings.shield);
+        isInvincible = true;
+        invincibilityTime = 0.25f;
     }
 
     public void StartLongInvincibility(float duration)
     {
         isInvincible = true;
-        invincibilityTime = duration; // Cambiamos el tiempo a 3s temporalmente
+        invincibilityTime = duration;
         timeSinceHit = 0;
     }
 }

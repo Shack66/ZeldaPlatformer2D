@@ -27,4 +27,6 @@ internal class AnimationStrings
     internal static string hit = "hit";
     internal static string attackCooldown = "attackCooldown";
     internal static string shouldContinueAttack = "shouldContinueAttack";
+    internal static string shield = "shield";
+    internal static string isStunned = "isStunned";
 }

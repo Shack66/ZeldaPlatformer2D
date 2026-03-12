@@ -71,7 +71,6 @@ public class Darknut : MonoBehaviour
         }
     }
 
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -125,10 +124,12 @@ public class Darknut : MonoBehaviour
         if (WalkDirection == WalkableDirection.Right)
         {
             WalkDirection = WalkableDirection.Left;
+            damageable.isFacingRight = false;
         }
         else if (WalkDirection == WalkableDirection.Left)
         {
             WalkDirection = WalkableDirection.Right;
+            damageable.isFacingRight = true;
         }
         else
         {

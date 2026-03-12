@@ -21454,6 +21454,10 @@ PrefabInstance:
       propertyPath: knockback.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6187519157803296762, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
+      propertyPath: shieldRecoil.x
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6541450559734880651, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 4
@@ -21781,7 +21785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8406933996065027467, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
       propertyPath: m_Size.x
-      value: 0.251235
+      value: 0.2445767
       objectReference: {fileID: 0}
     - target: {fileID: 8406933996065027467, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
       propertyPath: m_Size.y
@@ -21789,7 +21793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8406933996065027467, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
       propertyPath: m_Offset.x
-      value: 0.0762763
+      value: -0.09378421
       objectReference: {fileID: 0}
     - target: {fileID: 8406933996065027467, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
       propertyPath: m_Offset.y
@@ -21833,6 +21837,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8740404694213170960, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8740404694213170960, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
