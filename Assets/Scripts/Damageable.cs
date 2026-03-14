@@ -5,6 +5,7 @@ using static Darknut;
 public class Damageable : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
+    public UnityEvent<GameObject, Vector2>characterDeath;
 
     Animator animator;
 
@@ -39,7 +40,8 @@ public class Damageable : MonoBehaviour
             // If health drops below 0, character is no longer alive
             if (_health <= 0)
             {
-                IsAlive = false; 
+                IsAlive = false;
+                characterDeath?.Invoke(gameObject, transform.position);
             }
         }
     }
@@ -166,4 +168,16 @@ public class Damageable : MonoBehaviour
         invincibilityTime = duration;
         timeSinceHit = 0;
     }
+
+    public void Heal(int healthRestore)
+    {
+        if (IsAlive)
+        {
+            int maxHeal = Mathf.Max(MaxHealth - Health, 0);
+            int actualHeal = Mathf.Min(maxHeal, healthRestore);
+            Health += actualHeal;
+            CharacterEvents.characterHealed(gameObject, actualHeal);
+        }
+    }
+
 }
