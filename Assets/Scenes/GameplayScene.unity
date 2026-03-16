@@ -21597,6 +21597,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2381188568044664665, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
+      propertyPath: shieldRecoil.x
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3171406578781367908, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.86
@@ -21938,6 +21942,10 @@ PrefabInstance:
     - target: {fileID: 400669966706111956, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
       propertyPath: walkStopRate
       value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 400669966706111956, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
+      propertyPath: walkAcceleration
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2162465960858814285, guid: 69d47fb2a8c029148beec96c97ad1702, type: 3}
       propertyPath: m_LocalScale.x

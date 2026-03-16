@@ -458,7 +458,7 @@ public class PlayerController : MonoBehaviour
                 TryGetUp(); // then he getsup
                 _attackBuffered = true; // The intention to attack is saved for later
             }
-            else if (CanMove) // If Link can move normally
+            else if (CanMove || animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) // If Link can move normally or if Link attacks again
             {
                 _attackBuffered = false;
                 animator.SetTrigger(AnimationStrings.attackTrigger); // then he attacks (even if he's in a invincible state)
