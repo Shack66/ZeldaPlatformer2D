@@ -19,8 +19,10 @@ public class Attack : MonoBehaviour
 
         if (target != null)
         {
+            // If parent is facing the left by localscale, our knockback x flips its value to face the left as well
             Vector2 deliveredKnockback = transform.parent.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
 
+            // Hit the target
             Damageable.HitResult attackResult = target.Hit(attackDamage, deliveredKnockback, transform.parent.position);
 
             if (attackResult == Damageable.HitResult.Blocked)

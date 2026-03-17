@@ -14,7 +14,7 @@ TagManager:
   - Floor
   - Link
   - Enemy
-  - LinkHItbox
+  - LinkHitbox
   - EnemyHitbox
   - GroundDetection
   - Pickup

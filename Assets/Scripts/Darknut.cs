@@ -103,7 +103,7 @@ public class Darknut : MonoBehaviour
     {
         if (!damageable.LockVelocity)
         {
-            if (CanMove)
+            if (CanMove && touchingDirections.IsGrounded)
             {
                 rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocity.y);
             }
