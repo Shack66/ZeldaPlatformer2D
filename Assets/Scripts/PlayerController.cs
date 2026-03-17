@@ -466,6 +466,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnRangedAttack(InputAction.CallbackContext context)
+    {
+        // Check: This will maybe be for air attacks as well
+        if (context.started)
+        {
+            // If Link's on the floor (Link_OnFloor)
+            if (damageable.LockVelocity)
+            {
+                TryGetUp(); // then he getsup
+                _attackBuffered = true; // The intention to attack is saved for later
+            }
+            else if (CanMove || animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) // If Link can move normally or if Link attacks again
+            {
+                _attackBuffered = false;
+                animator.SetTrigger(AnimationStrings.rangedAttackTrigger); // then he attacks (even if he's in a invincible state)
+            }
+        }
+    }
+
     public void OnHit(int damage, Vector2 knockback)
     {
         // If Link's alive, knockback is applied
