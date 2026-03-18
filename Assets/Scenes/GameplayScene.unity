@@ -21661,6 +21661,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5708546463396495935, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
+      propertyPath: shieldRecoil.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5708546463396495935, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
+      propertyPath: shieldRecoil.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6187519157803296762, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
       propertyPath: knockback.x
       value: 2

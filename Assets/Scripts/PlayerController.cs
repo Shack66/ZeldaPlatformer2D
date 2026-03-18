@@ -346,6 +346,7 @@ public class PlayerController : MonoBehaviour
         {
             _airYVelocity = 0;
             _airXVelocity = 0;
+            animator.ResetTrigger(AnimationStrings.kickTrigger); // Reset the kickTrigger
         }
 
         // Save current state for next frame's comparison
@@ -355,7 +356,7 @@ public class PlayerController : MonoBehaviour
         // If there's a saved attack and Link is no longer physically blocked
         if (_attackBuffered && !damageable.LockVelocity && CanMove)
         {
-            animator.SetTrigger(AnimationStrings.attackTrigger); // then the attack is launched
+            animator.SetTrigger(touchingDirections.IsGrounded ? AnimationStrings.attackTrigger : AnimationStrings.kickTrigger); // then the attack is launched
             _attackBuffered = false; // the buffer is cleaned for not attacking infinitely
         }
     }
@@ -461,7 +462,7 @@ public class PlayerController : MonoBehaviour
             else if (CanMove || animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) // If Link can move normally or if Link attacks again
             {
                 _attackBuffered = false;
-                animator.SetTrigger(AnimationStrings.attackTrigger); // then he attacks (even if he's in a invincible state)
+                animator.SetTrigger(touchingDirections.IsGrounded ? AnimationStrings.attackTrigger : AnimationStrings.kickTrigger); // then he attacks (even if he's in a invincible state)
             }
         }
     }
