@@ -127,9 +127,18 @@ public class Damageable : MonoBehaviour
             float distanceX = attackerPos.x - transform.position.x;
             bool attackerIsOnRight = distanceX > 0;
 
+            // 1. Calculate the height difference
+            // Link's position - Darknut's base position
+            float relativeHeight = attackerPos.y - transform.position.y;
+
+            // 2. Define a threshold
+            // If Link is more than 0.25 units higher, the Darknut's shield cannot cover the hit
+            float shieldHeightLimit = 0.25f;
+            bool attackerIsTooHigh = relativeHeight > shieldHeightLimit;
+
             bool isBlockingPosition = (isFacingRight && attackerIsOnRight) || (!isFacingRight && !attackerIsOnRight);
 
-            if (canBlock && isBlockingPosition)
+            if (canBlock && isBlockingPosition && !attackerIsTooHigh)
             {
                 // If the Darknut's looking at the same direction that Link is, then his shield gets activated
                 OnShield();
