@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Splines;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Animator))]
 [RequireComponent(typeof(Damageable))]
@@ -11,6 +12,8 @@ public class DarkLinkAI : MonoBehaviour
     private Animator animator;
     private TouchingDirections touchingDirections;
     private Damageable damageable;
+
+    private Animator _playerAnimator;
 
     // Target to track the Player (Link)
     [Header("Targeting")]
@@ -37,8 +40,10 @@ public class DarkLinkAI : MonoBehaviour
 
     [Header("Combat Settings")]
     public float attackRange = 1.6f;
-    public float attackCooldown = 1.5f;
+    public float attackCooldown = 0.8f;
     private float _lastAttackTime = 0f;
+
+    public float maxRetreatDistance = 8f; // Maximum distance Dark Link will retreat before stopping
 
     [SerializeField]
     private bool _canMoveAI;
@@ -51,7 +56,14 @@ public class DarkLinkAI : MonoBehaviour
 
     [Header("Combat Logic")]
     private string _currentPhysicsTrigger; // Will store "attackTrigger" or "kickTrigger"
-    private float _comboWindowTime = 0.5f; // Max waiting time between combo hits
+    private float _comboWindowTime = 1.0f; // Max waiting time between combo hits
+
+    [Header("Spam Direction")]
+    private float _playerSpamTimer = 0f;
+    private float _spamThreshold = 1.2f; // Continuous attack time to consider it spam
+
+    private float _evadeTimer = 0f;
+    private float _patienceTimer = UnityEngine.Random.Range(1f, 3f);
 
     private void Awake()
     {
@@ -69,11 +81,20 @@ public class DarkLinkAI : MonoBehaviour
                 _targetPlayer = player.transform;
             }
         }
+        else
+        {
+            _playerAnimator = _targetPlayer.GetComponent<Animator>();
+        }
     }
 
     private void FixedUpdate()
     {
         _currentPhysicsTrigger = touchingDirections.IsGrounded ? AnimationStrings.attackTrigger : AnimationStrings.kickTrigger;
+
+        if (touchingDirections.IsGrounded && damageable.LockVelocity && damageable.IsAlive)
+        {
+            animator.SetTrigger(AnimationStrings.getUp);
+        }
 
         // Only make decisions if alive and not currently reacting to a hit
         if (!damageable.IsAlive || damageable.LockVelocity)
@@ -83,6 +104,12 @@ public class DarkLinkAI : MonoBehaviour
         }
 
         _canMoveAI = animator.GetBool(AnimationStrings.canMove);
+
+        // When evading, rest the time left to evade
+        if (_evadeTimer > 0)
+        {
+            _evadeTimer -= Time.fixedDeltaTime;
+        }
 
         // Where is the player (Link) relative to Dark Link?
         if (_targetPlayer != null)
@@ -100,6 +127,7 @@ public class DarkLinkAI : MonoBehaviour
 
         // Sync AI intent with the base state machine logic
         SyncAnimatorStates();
+
     }
 
     private void CalculateMovementIntent()
@@ -111,8 +139,25 @@ public class DarkLinkAI : MonoBehaviour
         // Basic behavior toggle (Hunting or Fleeing)
         float horizontalDirection = rawXOffset > 0 ? 1f : -1f;
 
+        // For Spam
         // Check if Link is attacking
-        bool playerIsAttacking = animator.GetBool(AnimationStrings.attackTrigger);
+        bool playerIsAttacking = IsPlayerAttacking();
+        if (playerIsAttacking)
+        {
+            _playerSpamTimer += Time.fixedDeltaTime;
+        }
+        else
+        {
+            _playerSpamTimer = MathF.Max(0, _playerSpamTimer - Time.fixedDeltaTime);
+        }
+
+        bool isLinkSpamming = _playerSpamTimer > _spamThreshold;
+
+        if (!_canMoveAI)
+        {
+            _moveIntent = Vector2.zero;
+            return; // Not to walk nor change direction while shooting
+        }
 
         // Decide the close attack trigger (Sword or Kick)
         string triggerAttack = touchingDirections.IsGrounded ? AnimationStrings.attackTrigger : AnimationStrings.kickTrigger;
@@ -120,52 +165,114 @@ public class DarkLinkAI : MonoBehaviour
         if (_isAggressive)
         {
             // For Evading
-            if (playerIsAttacking && distanceToPlayer < 2.0f)
-            {
-                isEvading = true;
-            }
-            else
-            {
-                isEvading = false;
-            }
+            _evadeTimer = Mathf.Max(0, _evadeTimer - Time.fixedDeltaTime);
+
+            // If there's a close or spam attack, Dark Link evades it
+            isEvading = (playerIsAttacking && distanceToPlayer < 2.5f) || isLinkSpamming || _evadeTimer > 0;
 
             // For Movement
             if (isEvading)
             {
-                _moveIntent = new Vector2(-horizontalDirection, 0); // If Dark Link is evading, then he gets away from Link
+                // Check if Dark Link stepped back too much
+                if (distanceToPlayer < maxRetreatDistance)
+                {
+                    _moveIntent = new Vector2(-horizontalDirection, 0); // If Dark Link is evading, then he gets away from Link
+                }
+                else
+                {
+                    _moveIntent = Vector2.zero; // He stands and waits/shoots.
+                }
+            }
+            else if (_patienceTimer <= 0)
+            {
+                _moveIntent = new Vector2(horizontalDirection, 0); // If Link doesn't move, then Dark Link moves toward him to attack
+
+                if (touchingDirections.IsGrounded && UnityEngine.Random.value < 0.02f)
+                {
+                    animator.SetTrigger(AnimationStrings.jumpTrigger);
+                    rb.linearVelocity = new Vector2(horizontalDirection * 5f, walkJumpImpulse); // front impulse
+                    animator.SetTrigger(AnimationStrings.kickTrigger);
+                    _patienceTimer = UnityEngine.Random.Range(1f, 3f);
+                }
             }
             // Move towards Player (Link)
-            else if (distanceToPlayer > 1.5f)
+            else if (distanceToPlayer > 5.0f)
             {
                 _moveIntent = new Vector2(horizontalDirection, 0); // If Dark Link is far from Link, he goes after Link
             }
+            else if (distanceToPlayer < 1.3f)
+            {
+                _moveIntent = new Vector2(-horizontalDirection * 0.5f, 0); // If Dark Link is too close to Link, he slowly steps back 
+            }
+            // Waiting for Link to move
             else
             {
-                _moveIntent = Vector2.zero; // If Dark Link is very close, he stops moving to prepare for attacks
+                _moveIntent = Vector2.zero; // If Dark Link is very close, he stops moving to prepare for the next action
+                _patienceTimer -= Time.fixedDeltaTime;
             }
 
-            // For jumps
+            // For Jumps
             if (touchingDirections.IsGrounded && _canMoveAI)
             {
-                bool randomJumpChance = distanceToPlayer < 3f && UnityEngine.Random.value < 0.01f;
+                // Check if Link is doing the aerial kick
+                bool playerDoingAerialKick = _playerAnimator != null && _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Link_AerialAttack_Kick");
 
-                // Jumps if Link attacks, if he's higher, or with a 1% chance in each frame is Link is close
-                if (playerIsAttacking && distanceToPlayer < 2.5f || _targetPlayer.position.y - transform.position.y > 2f || randomJumpChance)
+                // Counterattack
+                if (playerDoingAerialKick && distanceToPlayer < 4f)
                 {
                     animator.SetTrigger(AnimationStrings.jumpTrigger);
-                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, walkJumpImpulse);
+                    animator.SetTrigger(AnimationStrings.kickTrigger);
 
-                    // Jumps backwars to dodge, so he receives an extra impulse
-                    if (isEvading)
+                    // Dark Link is launched aggressively towards Link to win the air crash
+                    rb.linearVelocity = new Vector2(horizontalDirection * 8f, walkJumpImpulse * 1.1f);
+                    UpdateFacingDirection(horizontalDirection > 0);
+                    _moveIntent = Vector2.zero;
+                }
+                // Evading backwards
+                else if (isEvading && playerIsAttacking && distanceToPlayer < 3f)
+                {
+                    animator.SetTrigger(AnimationStrings.jumpTrigger);
+
+                    // Long fast backward jump 
+                    rb.linearVelocity = new Vector2(-horizontalDirection * 7f, walkJumpImpulse * 0.8f);
+                    _moveIntent = Vector2.zero;
+                }
+                else
+                {
+                    bool playerIsHigher = _targetPlayer.position.y - transform.position.y > 2f;
+                    bool randomJumpChance = distanceToPlayer < 3f && UnityEngine.Random.value < 0.01f;
+
+                    // Jumps if Link's higher, or with a 1% chance in each frame is Link is close
+                    if (playerIsHigher || randomJumpChance)
                     {
-                        rb.linearVelocity = new Vector2(-horizontalDirection * 5f, rb.linearVelocity.y);
+                        animator.SetTrigger(AnimationStrings.jumpTrigger);
+                        rb.linearVelocity = new Vector2(rb.linearVelocity.x, walkJumpImpulse);
+
+                        // If jumping randomly and Link is close, Dark Link kicks
+                        if (randomJumpChance && distanceToPlayer > 2f)
+                        {
+                            animator.SetTrigger(AnimationStrings.kickTrigger);
+                        }
                     }
                 }
             }
 
             // For Attacks
+            bool isAttacking = animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack");
 
-            HandleAttackLogic(distanceToPlayer);
+            if (isAttacking || distanceToPlayer < 1.5f)
+            {
+                // If Dark Link is attacking or Link is too close, 
+                // Dark Link looks at Link
+                UpdateFacingDirection(rawXOffset > 0); 
+            }
+            else if (_moveIntent.x != 0)
+            {
+                // If Dark Link is moving (and not attacking),
+                // Dark Link looks in the direction he's walking
+                UpdateFacingDirection(_moveIntent.x > 0);  
+            }
+            HandleAttackLogic(distanceToPlayer, isLinkSpamming, horizontalDirection == 1f);
 
         }
         else
@@ -175,7 +282,20 @@ public class DarkLinkAI : MonoBehaviour
         }
 
         // Update Facing Direction
-        if (_moveIntent.x != 0)
+        bool isRecentlyAttacking = Time.time < _lastAttackTime + 0.4f;
+
+        if (isRecentlyAttacking)
+        {
+            // Lock Dark Link's gaze towards Link if he has just attacked/shooted
+            UpdateFacingDirection(horizontalDirection > 0);
+
+            // If Link was spamming, lock the movement to 0 so Dark Link doesn't run backwards while shooting 
+            if (isLinkSpamming)
+            {
+                _moveIntent = Vector2.zero;
+            }
+        }
+        else if (_moveIntent.x != 0 && !animator.GetCurrentAnimatorStateInfo(0).IsName("Link_Bow"))
         {
             UpdateFacingDirection(_moveIntent.x > 0);
         }
@@ -183,8 +303,28 @@ public class DarkLinkAI : MonoBehaviour
 
     private int _maxComboSteps = 0; // How many hits did he make this time?
 
-    private void HandleAttackLogic(float distanceToPlayer)
+    private void HandleAttackLogic(float distanceToPlayer, bool isLinkSpamming, bool horizontalDirection)
     {
+        // If Link attacks and Dark Link is close
+        if (IsPlayerAttacking() &&  distanceToPlayer < 2.5f)
+        {
+            if (UnityEngine.Random.value < 0.4f)
+            {
+                UpdateFacingDirection(horizontalDirection);
+                ExecuteComboStep(horizontalDirection); // Dark Link swordattacks
+                return;
+            }
+        }
+        // If player (Link) is spamming and Dark Link is at a safe distance, then shoots
+        if (isLinkSpamming && distanceToPlayer > 3.5f && Time.time > _lastAttackTime + (attackCooldown * 0.5f))
+        {
+            UpdateFacingDirection(horizontalDirection);
+            _moveIntent = Vector2.zero; // Dark Link only stops when shooting
+            animator.SetTrigger(AnimationStrings.rangedAttackTrigger);
+            _lastAttackTime = Time.time; // Save when the attack occured
+            return; // Not to chain in further attacks
+        }
+        
         // Only attack if the actual time is greater than the time of the last attack + the cooldown, and if Dark Link it's not in the middle of a combo
         if (Time.time >= _lastAttackTime + attackCooldown && attackCounter == 0)
         {
@@ -192,7 +332,7 @@ public class DarkLinkAI : MonoBehaviour
             if (distanceToPlayer < 1.5f)
             {
                 _maxComboSteps = UnityEngine.Random.Range(1, 4);
-                ExecuteComboStep();
+                ExecuteComboStep(horizontalDirection);
             }
             // If he's far and on the floor, then he uses the bow
             else if (distanceToPlayer > 5.0f && distanceToPlayer < 10f && touchingDirections.IsGrounded)
@@ -204,15 +344,14 @@ public class DarkLinkAI : MonoBehaviour
         }
         else if (attackCounter > 0 && attackCounter < _maxComboSteps)
         {
-            bool linkIsInRange = distanceToPlayer <= 2f;
-
+            bool linkIsInRange = distanceToPlayer <= 2.2f;
             float timeSinceLastHit = Time.time - _lastAttackTime;
             bool insideComboWindow = timeSinceLastHit > 0.2f && timeSinceLastHit < _comboWindowTime;
 
             // If Link is close, the min time has passed, and the max time (_comboWindowTime) hasn't
             if (linkIsInRange && insideComboWindow)
             {
-                ExecuteComboStep(); // Dark Link does the combo
+                ExecuteComboStep(horizontalDirection); // Dark Link does the combo
             }
             else if (timeSinceLastHit >= _comboWindowTime || !linkIsInRange)
             {
@@ -227,24 +366,38 @@ public class DarkLinkAI : MonoBehaviour
         }
     }
 
-    private void ExecuteComboStep()
+    private void ExecuteComboStep(bool horizontalDirection)
     {
+        animator.SetInteger(AnimationStrings.comboStep, attackCounter); // Tell the animator what hit number is
         animator.SetTrigger(_currentPhysicsTrigger);
         attackCounter++;
         _lastAttackTime = Time.time; // Save when the attack occured
+
+        // Front impulse: Dark Link is launched a little towards Link when attacking
+        float boostForce = 4f;
+        float direction = _isFacingRight ? 1f : -1f;
+        rb.linearVelocity = new Vector2(direction * boostForce, rb.linearVelocity.y);
+
+        UpdateFacingDirection(horizontalDirection);
+        _patienceTimer = UnityEngine.Random.Range(1f, 3f);
     }
 
     private void ResetCombo()
     {
         attackCounter = 0;
         _maxComboSteps = 0;
+        animator.SetInteger(AnimationStrings.comboStep, 0);
         animator.ResetTrigger(AnimationStrings.attackTrigger);
         animator.ResetTrigger(AnimationStrings.kickTrigger);
+
+        _evadeTimer = 2.0f; // When Dark Link finishes a combo, he has 2 seconds of fleeing
     }
 
     private bool IsPlayerAttacking()
     {
-        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+        if (_playerAnimator == null) return false;
+
+        AnimatorStateInfo state = _playerAnimator.GetCurrentAnimatorStateInfo(0);
 
         return state.IsName("Link_NeutralAttack_1") ||
                state.IsName("Link_NeutralAttack_2") ||
@@ -261,11 +414,15 @@ public class DarkLinkAI : MonoBehaviour
         // If he can move, then the target velocity calculated before is maintained
         targetXSpeed = _canMoveAI ? targetXSpeed : 0;
 
-        // Smoothly reach the target speed (simulates Link's movement feel)
-        float currentXVelocity = Mathf.Lerp(rb.linearVelocity.x, targetXSpeed, Time.fixedDeltaTime * lerpSpeed);
+        // Horizontal move forced if Dark Link is on floor
+        if (touchingDirections.IsGrounded)
+        {
+            // Smoothly reach the target speed (simulates Link's movement feel)
+            float currentXVelocity = Mathf.Lerp(rb.linearVelocity.x, targetXSpeed, Time.fixedDeltaTime * lerpSpeed);
 
-        // Apply new velocity
-        rb.linearVelocity = new Vector2(currentXVelocity, rb.linearVelocity.y);
+            // Apply new velocity
+            rb.linearVelocity = new Vector2(currentXVelocity, rb.linearVelocity.y);
+        }
     }
 
     private void SyncAnimatorStates()
@@ -304,9 +461,15 @@ public class DarkLinkAI : MonoBehaviour
     // Temporary logic to decide when the AI runs vs walks
     private bool IsRunningIntent()
     {
-        if (_targetPlayer == null) return false;
-        // Run if far away to close the gap fast, or if fleeing
-        return Mathf.Abs(_targetPlayer.position.x - transform.position.x) > 5f || !_isAggressive;
+        if (_targetPlayer == null)
+        {
+            return false;
+        }
+
+        float dist = Mathf.Abs(_targetPlayer.position.x - transform.position.x);
+
+        // Run if far away to close the gap fast, if fleeing, or if Link's getting close
+        return dist > 4.5f || isEvading || !_isAggressive;
     }
 
     public void OnHitAI(int damage, Vector2 knockback)
