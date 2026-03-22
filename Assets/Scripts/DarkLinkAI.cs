@@ -68,9 +68,7 @@ public class DarkLinkAI : MonoBehaviour
     // Active/Inactive System
     [Header("Aggro System")]
     public float aggroRadius = 12f; // Distance for Dark Link to awaken
-    public float loseAggroRadius = 15f; // Distance Link must flee to lose Dark Link
     private bool _isActive = false; // Is Dark Link fighting now?
-    private Vector2 _spawnPosition; 
 
 
     private void Awake()
@@ -95,8 +93,6 @@ public class DarkLinkAI : MonoBehaviour
         {
             _playerAnimator = _targetPlayer.GetComponent<Animator>();
         }
-
-        _spawnPosition = transform.position; // Save initial position where Dark Link was
     }
 
     private void FixedUpdate()
@@ -133,13 +129,6 @@ public class DarkLinkAI : MonoBehaviour
             if (!_isActive && distanceToPlayer <= aggroRadius)
             {
                 _isActive = true; // Dark Link awakens
-                Debug.Log("dark link is awake");
-            }
-            // If Link flees enough
-            else if (_isActive && distanceToPlayer > loseAggroRadius)
-            {
-                _isActive = false; // Dark Link gets inactive
-                Debug.Log("dark link is asleepagain ");
             }
 
             // Execute action according to his state
@@ -149,8 +138,9 @@ public class DarkLinkAI : MonoBehaviour
             }
             else
             {
-                ReturnToSpawnPoint();
+                _moveIntent = Vector2.zero;
             }
+
         }
         else
         {
@@ -163,7 +153,6 @@ public class DarkLinkAI : MonoBehaviour
 
         // Sync AI intent with the base state machine logic
         SyncAnimatorStates();
-
     }
 
     private void CalculateMovementIntent()
@@ -520,31 +509,6 @@ public class DarkLinkAI : MonoBehaviour
 
         // Run if far away to close the gap fast, if fleeing, or if Link's getting close
         return dist > 4.5f || isEvading || !_isAggressive;
-    }
-
-
-    private void ReturnToSpawnPoint()
-    {
-        // Calculate horizontal distance from his spawn point
-        float distanceFromSpawn = Mathf.Abs(_spawnPosition.x - transform.position.x);
-
-        if (distanceFromSpawn > 0.05f) // If Dark Link still doesn't get to his spawn point
-        {
-            // Walk back
-            float horizontalDirection = _spawnPosition.x > transform.position.x ? 1f : -1f;
-            _moveIntent = new Vector2(horizontalDirection, 0);
-
-            // Make Dark Link look where he's walking
-            UpdateFacingDirection(horizontalDirection > 0);
-        }
-        else
-        {
-            // He already got to the spawn point, so he stays still waiting for Link
-            _moveIntent = Vector2.zero;
-
-            // Reset isEvading if he got stuck while fleeing
-            isEvading = false;
-        }
     }
 
     public void OnHitAI(int damage, Vector2 knockback)
