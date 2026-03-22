@@ -63,7 +63,15 @@ public class DarkLinkAI : MonoBehaviour
     private float _spamThreshold = 1.2f; // Continuous attack time to consider it spam
 
     private float _evadeTimer = 0f;
-    private float _patienceTimer = UnityEngine.Random.Range(1f, 3f);
+    private float _patienceTimer;
+
+    // Active/Inactive System
+    [Header("Aggro System")]
+    public float aggroRadius = 12f; // Distance for Dark Link to awaken
+    public float loseAggroRadius = 15f; // Distance Link must flee to lose Dark Link
+    private bool _isActive = false; // Is Dark Link fighting now?
+    private Vector2 _spawnPosition; 
+
 
     private void Awake()
     {
@@ -71,6 +79,8 @@ public class DarkLinkAI : MonoBehaviour
         animator = GetComponent<Animator>();
         touchingDirections = GetComponent<TouchingDirections>();
         damageable = GetComponent<Damageable>();
+
+        _patienceTimer = UnityEngine.Random.Range(1f, 3f);
 
         // Try to automatically find the Player (Link) if not assigned in the inspector
         if (_targetPlayer == null)
@@ -85,6 +95,8 @@ public class DarkLinkAI : MonoBehaviour
         {
             _playerAnimator = _targetPlayer.GetComponent<Animator>();
         }
+
+        _spawnPosition = transform.position; // Save initial position where Dark Link was
     }
 
     private void FixedUpdate()
@@ -114,7 +126,31 @@ public class DarkLinkAI : MonoBehaviour
         // Where is the player (Link) relative to Dark Link?
         if (_targetPlayer != null)
         {
-            CalculateMovementIntent();
+            // Calculate real distance between Link and Dark Link
+            float distanceToPlayer = Vector2.Distance(transform.position, _targetPlayer.position);
+
+            // If Link is in the zone
+            if (!_isActive && distanceToPlayer <= aggroRadius)
+            {
+                _isActive = true; // Dark Link awakens
+                Debug.Log("dark link is awake");
+            }
+            // If Link flees enough
+            else if (_isActive && distanceToPlayer > loseAggroRadius)
+            {
+                _isActive = false; // Dark Link gets inactive
+                Debug.Log("dark link is asleepagain ");
+            }
+
+            // Execute action according to his state
+            if (_isActive)
+            {
+                CalculateMovementIntent();
+            }
+            else
+            {
+                ReturnToSpawnPoint();
+            }
         }
         else
         {
@@ -171,7 +207,21 @@ public class DarkLinkAI : MonoBehaviour
             isEvading = (playerIsAttacking && distanceToPlayer < 2.5f) || isLinkSpamming || _evadeTimer > 0;
 
             // For Movement
-            if (isEvading)
+            // If Dark Link is between Link and a wall
+            if (touchingDirections.IsOnWall && distanceToPlayer <= 3f && touchingDirections.IsGrounded)
+            {
+                // He jumps towards Link to pass him
+                float escapeDirection = (transform.position.x < _targetPlayer.position.x) ? 1f : -1f;
+
+                animator.SetTrigger(AnimationStrings.jumpTrigger);
+                rb.linearVelocity = new Vector2(escapeDirection * 7f, walkJumpImpulse);
+                animator.SetTrigger(AnimationStrings.kickTrigger);
+
+                // Reset timers so that he doesn't stay trapped in the wait logic
+                _patienceTimer = UnityEngine.Random.Range(1f, 3f);
+                _evadeTimer = 0;
+            }
+            else if (isEvading)
             {
                 // Check if Dark Link stepped back too much
                 if (distanceToPlayer < maxRetreatDistance)
@@ -470,6 +520,31 @@ public class DarkLinkAI : MonoBehaviour
 
         // Run if far away to close the gap fast, if fleeing, or if Link's getting close
         return dist > 4.5f || isEvading || !_isAggressive;
+    }
+
+
+    private void ReturnToSpawnPoint()
+    {
+        // Calculate horizontal distance from his spawn point
+        float distanceFromSpawn = Mathf.Abs(_spawnPosition.x - transform.position.x);
+
+        if (distanceFromSpawn > 0.05f) // If Dark Link still doesn't get to his spawn point
+        {
+            // Walk back
+            float horizontalDirection = _spawnPosition.x > transform.position.x ? 1f : -1f;
+            _moveIntent = new Vector2(horizontalDirection, 0);
+
+            // Make Dark Link look where he's walking
+            UpdateFacingDirection(horizontalDirection > 0);
+        }
+        else
+        {
+            // He already got to the spawn point, so he stays still waiting for Link
+            _moveIntent = Vector2.zero;
+
+            // Reset isEvading if he got stuck while fleeing
+            isEvading = false;
+        }
     }
 
     public void OnHitAI(int damage, Vector2 knockback)
