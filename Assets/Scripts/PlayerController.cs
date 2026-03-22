@@ -450,7 +450,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        // Check: This will maybe be for air attacks as well
         if (context.started)
         {
             // If Link's on the floor (Link_OnFloor)
