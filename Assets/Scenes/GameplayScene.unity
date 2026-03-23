@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.41960785, g: 0.47843137, b: 0.627451, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -5770,7 +5770,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 291.79, y: 0.36800027, z: -9}
+  m_LocalPosition: {x: -38.3878, y: 0.36799616, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14270,7 +14270,7 @@ Transform:
   m_GameObject: {fileID: 1474780142}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 291.79, y: 0.36800027, z: -9}
+  m_LocalPosition: {x: -45, y: 0.36800027, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15979,7 +15979,7 @@ Transform:
   m_GameObject: {fileID: 1663001267}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 291.79, y: 0.36800027, z: -9}
+  m_LocalPosition: {x: -45, y: 0.36800027, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21583,7 +21583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3171406578781367908, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 291.79
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 3171406578781367908, guid: 6071ccf9b24a9eb4caba971f11d8aa22, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21768,6 +21768,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4462353057292369375, guid: 012c824cb8718614ba4af5fae1f46635, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: 174c42d0-23d2-4246-81ae-d7aced9cb45c
+      objectReference: {fileID: 0}
     - target: {fileID: 4757763440611448438, guid: 012c824cb8718614ba4af5fae1f46635, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
