@@ -6,7 +6,7 @@ public class PlayOneShotBehaviour : StateMachineBehaviour
     public bool playOnEnter = true, playOnExit = false, playAfterDelay = false;
 
     // Filter so that the sfx only sounds in certain characters
-    public string requiredTag = "DarkLink";
+    public string requiredTag = "";
 
     // Delayed sound timer
     public float playDelay = 0.25f;
