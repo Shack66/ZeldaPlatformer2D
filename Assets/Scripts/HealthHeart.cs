@@ -13,10 +13,13 @@ public class HealthHeart : MonoBehaviour
     private bool isGrounded = false;
     private Rigidbody2D rb;
 
+    AudioSource tinyHeartSource;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        tinyHeartSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -45,6 +48,11 @@ public class HealthHeart : MonoBehaviour
             if (damageable)
             {
                 damageable.Heal(healthRestore);
+
+                // Heart's SFX 
+                if (tinyHeartSource)
+                    AudioSource.PlayClipAtPoint(tinyHeartSource.clip, gameObject.transform.position, tinyHeartSource.volume);
+
                 Destroy(gameObject); // Destroy the heart after healing Player (Link)
             }
         }
