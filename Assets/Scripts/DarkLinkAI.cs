@@ -202,13 +202,22 @@ public class DarkLinkAI : MonoBehaviour
                 // He jumps towards Link to pass him
                 float escapeDirection = (transform.position.x < _targetPlayer.position.x) ? 1f : -1f;
 
+                _moveIntent = new Vector2(escapeDirection, 0);
+
+                ResetCombo();
+
                 animator.SetTrigger(AnimationStrings.jumpTrigger);
-                rb.linearVelocity = new Vector2(escapeDirection * 7f, walkJumpImpulse);
+                rb.linearVelocity = new Vector2(escapeDirection * 8f, walkJumpImpulse);
                 animator.SetTrigger(AnimationStrings.kickTrigger);
+
+                _lastAttackTime = Time.time;
 
                 // Reset timers so that he doesn't stay trapped in the wait logic
                 _patienceTimer = UnityEngine.Random.Range(1f, 3f);
                 _evadeTimer = 0;
+
+                UpdateFacingDirection(escapeDirection > 0);
+                return;
             }
             else if (isEvading)
             {
