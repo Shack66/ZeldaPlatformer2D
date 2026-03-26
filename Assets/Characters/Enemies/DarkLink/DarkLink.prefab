@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 5671038552745597820}
   - component: {fileID: 7403085636096869281}
   - component: {fileID: 6629859367881988668}
+  - component: {fileID: 5262750842152831570}
   m_Layer: 8
   m_Name: DarkLink
   m_TagString: Untagged
@@ -478,7 +479,7 @@ Animator:
   m_GameObject: {fileID: 5685651245882975585}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c11f1b51bf3cff049b4a5b5eb43b217c, type: 2}
+  m_Controller: {fileID: 22100000, guid: 288db29b6a48b8440af97ffdf65762b7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -515,8 +516,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &1412996571405603454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,7 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   launchPoint: {fileID: 1004374036606140894}
-  projectilePrefab: {fileID: 4028186036031136551, guid: 1ae18d8d2adf59b4a9fdb081b8a3dd05, type: 3}
+  projectilePrefab: {fileID: 4028186036031136551, guid: af28943d8b270fa4c914f0e79482bd08, type: 3}
 --- !u!114 &6629859367881988668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -618,3 +619,22 @@ MonoBehaviour:
   runSpeed: 13
   lerpSpeed: 10
   _isAggressive: 1
+  attackRange: 1.6
+  attackCooldown: 0.8
+  maxRetreatDistance: 8
+  _canMoveAI: 0
+  aggroRadius: 15
+--- !u!114 &5262750842152831570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5685651245882975585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa70226828f27541a6f39d342ec8749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFlash
+  flashColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+  flashSpeed: 8

@@ -221,8 +221,29 @@ public class DarkLinkAI : MonoBehaviour
             }
             else if (isEvading)
             {
+                // If arrow-spam
+                if (isLinkSpamming && IsPlayerShootingBow())
+                {
+                    // Run towards Link
+                    _moveIntent = new Vector2(horizontalDirection, 0);
+
+                    // Jump to evade the arrows
+                    if (touchingDirections.IsGrounded)
+                    {
+                        if (UnityEngine.Random.value < 0.03f)
+                        {
+                            animator.SetTrigger(AnimationStrings.jumpTrigger);
+                            // Strongly jump forward to close the gap
+                            rb.linearVelocity = new Vector2(horizontalDirection * 7f, walkJumpImpulse);
+
+                            // Kick when jumping towards Link
+                            animator.SetTrigger(AnimationStrings.kickTrigger);
+                        }
+                    }
+                }
+                // For normal evading (melee attacks)
                 // Check if Dark Link stepped back too much
-                if (distanceToPlayer < maxRetreatDistance)
+                else if (distanceToPlayer < maxRetreatDistance)
                 {
                     _moveIntent = new Vector2(-horizontalDirection, 0); // If Dark Link is evading, then he gets away from Link
                 }
@@ -277,7 +298,7 @@ public class DarkLinkAI : MonoBehaviour
                     _moveIntent = Vector2.zero;
                 }
                 // Evading backwards
-                else if (isEvading && playerIsAttacking && distanceToPlayer < 3f)
+                else if (isEvading && playerIsAttacking && distanceToPlayer < 3f && !IsPlayerShootingBow())
                 {
                     animator.SetTrigger(AnimationStrings.jumpTrigger);
 
@@ -364,7 +385,7 @@ public class DarkLinkAI : MonoBehaviour
             }
         }
         // If player (Link) is spamming and Dark Link is at a safe distance, then shoots
-        if (isLinkSpamming && distanceToPlayer > 3.5f && Time.time > _lastAttackTime + (attackCooldown * 0.5f))
+        if (isLinkSpamming && !IsPlayerShootingBow() && distanceToPlayer > 3.5f && Time.time > _lastAttackTime + (attackCooldown * 0.5f))
         {
             UpdateFacingDirection(horizontalDirection);
             _moveIntent = Vector2.zero; // Dark Link only stops when shooting
@@ -383,7 +404,7 @@ public class DarkLinkAI : MonoBehaviour
                 ExecuteComboStep(horizontalDirection);
             }
             // If he's far and on the floor, then he uses the bow
-            else if (distanceToPlayer > 5.0f && distanceToPlayer < 10f && touchingDirections.IsGrounded)
+            else if (distanceToPlayer > 5.0f && distanceToPlayer < 10f && touchingDirections.IsGrounded && !(isLinkSpamming && IsPlayerShootingBow()))
             {
                 animator.SetTrigger(AnimationStrings.rangedAttackTrigger);
                 _lastAttackTime = Time.time; // Save when the attack occured
@@ -450,7 +471,17 @@ public class DarkLinkAI : MonoBehaviour
         return state.IsName("Link_NeutralAttack_1") ||
                state.IsName("Link_NeutralAttack_2") ||
                state.IsName("Link_NeutralAttack_3") ||
-               state.IsName("Link_AerialAttack_Kick");
+               state.IsName("Link_AerialAttack_Kick") ||
+               state.IsName("Link_Bow");
+    }
+
+    private bool IsPlayerShootingBow()
+    {
+        if (_playerAnimator == null)
+        {
+            return false;
+        }
+        return _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Link_Bow");
     }
 
     private void ApplyPhysicsMovement()
