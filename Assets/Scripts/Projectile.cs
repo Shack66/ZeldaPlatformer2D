@@ -34,7 +34,6 @@ public class Projectile : MonoBehaviour
 
             if (attackResult == Damageable.HitResult.Damage) // Hit the target
             {
-                Debug.Log(collision.name + " hit for " + damage);
                 Destroy(gameObject);
             }
             else if (attackResult == Damageable.HitResult.Blocked)
