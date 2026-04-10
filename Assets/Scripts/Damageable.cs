@@ -189,4 +189,16 @@ public class Damageable : MonoBehaviour
         }
     }
 
+    public void KillInstantly()
+    {
+        IsAlive = false;
+
+        // Stop the movement so Link doesn't fall infinitely
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.simulated = false;
+        }
+
+    }
 }
