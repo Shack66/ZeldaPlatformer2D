@@ -189,4 +189,23 @@ public class Damageable : MonoBehaviour
         }
     }
 
+    public void KillInstantly()
+    {
+        // Save the actual health to then set the health to 0 when falling off the level
+        int damageTaken = Health;
+        Health = 0;
+
+        IsAlive = false;
+
+        // Warn the UIManager, so that the Slider drops down to 0
+        CharacterEvents.characterDamaged?.Invoke(gameObject, damageTaken);
+
+        // Stop the movement so Link doesn't fall infinitely
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.simulated = false;
+        }
+
+    }
 }
