@@ -42,6 +42,16 @@ public class Damageable : MonoBehaviour
             {
                 IsAlive = false;
                 characterDeath?.Invoke(gameObject, transform.position);
+
+                // Only if the Player (Link) dies, then Game Over Screen gets activated
+                if (gameObject.CompareTag("Player"))
+                {
+                    GameOverManager goManager = Object.FindAnyObjectByType<GameOverManager>(FindObjectsInactive.Include);
+                    if (goManager != null)
+                    {
+                        goManager.Invoke("EnableGameOver", 0.5f);
+                    }
+                }
             }
         }
     }
@@ -189,4 +199,17 @@ public class Damageable : MonoBehaviour
         }
     }
 
+    public void KillInstantly()
+    {
+        // Save the actual health to then set the health to 0 when falling off the level
+        int damageTaken = Health;
+        Health = 0;
+
+        // Stop the movement so Link doesn't fall infinitely
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.simulated = false;
+        }
+    }
 }
