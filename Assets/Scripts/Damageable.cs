@@ -7,6 +7,8 @@ public class Damageable : MonoBehaviour
     public UnityEvent<int, Vector2> damageableHit;
     public UnityEvent<GameObject, Vector2>characterDeath;
 
+    private GameOverManager goManager;
+
     Animator animator;
 
     [SerializeField]
@@ -43,13 +45,19 @@ public class Damageable : MonoBehaviour
                 IsAlive = false;
                 characterDeath?.Invoke(gameObject, transform.position);
 
-                // Only if the Player (Link) dies, then Game Over Screen gets activated
+                // If the Player (Link) dies, then Game Over Screen gets activated
                 if (gameObject.CompareTag("Player"))
                 {
-                    GameOverManager goManager = Object.FindAnyObjectByType<GameOverManager>(FindObjectsInactive.Include);
                     if (goManager != null)
                     {
-                        goManager.Invoke("EnableGameOver", 0.5f);
+                        goManager.Invoke("EnableGameOver", 0.75f);
+                    }
+                }
+                else if (gameObject.CompareTag("DarkLink"))
+                {
+                    if (goManager != null)
+                    {
+                        goManager.Invoke("EnableVictory", 2f);
                     }
                 }
             }
@@ -112,6 +120,7 @@ public class Damageable : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        goManager = Object.FindAnyObjectByType<GameOverManager>(FindObjectsInactive.Include);
     }
 
     private void Update()

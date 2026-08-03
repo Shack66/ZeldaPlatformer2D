@@ -34,10 +34,6 @@ public class Attack : MonoBehaviour
 
                 linkDamageable.LockVelocity = true; // Links' velocity is blocked
             }
-            else if (attackResult == Damageable.HitResult.Damage) // Hit the target
-            {
-                Debug.Log(collision.name + " hit for " + attackDamage);
-            }
         }
     }
 }

@@ -4,10 +4,18 @@ using UnityEngine.SceneManagement;
 public class GameOverManager : MonoBehaviour
 {
     public GameObject gameOverPanel;
+    public GameObject gameVictoryPanel;
 
     public void EnableGameOver()
     {
         gameOverPanel.SetActive(true);
+        // Stop the game
+        Time.timeScale = 0;
+    }
+
+    public void EnableVictory()
+    {
+        gameVictoryPanel.SetActive(true);
         // Stop the game
         Time.timeScale = 0;
     }
