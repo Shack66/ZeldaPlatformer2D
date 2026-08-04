@@ -32,4 +32,5 @@ internal class AnimationStrings
     internal static string shield = "shield";
     internal static string isStunned = "isStunned";
     internal static string comboStep = "comboStep";
+    internal static string victory = "victory";
 }

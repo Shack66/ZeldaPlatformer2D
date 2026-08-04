@@ -573,6 +573,13 @@ public class DarkLinkAI : MonoBehaviour
         {
             // AI stops dead upon death
             rb.linearVelocity = Vector2.zero;
+
+            // Music changes
+            MusicPlayer musicPlayer = FindFirstObjectByType<MusicPlayer>();
+            if (musicPlayer != null)
+            {
+                musicPlayer.PlayVictory();
+            }
         }
     }
 }

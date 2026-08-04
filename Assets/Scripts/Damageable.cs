@@ -7,6 +7,8 @@ public class Damageable : MonoBehaviour
     public UnityEvent<int, Vector2> damageableHit;
     public UnityEvent<GameObject, Vector2>characterDeath;
 
+    private GameOverManager goManager;
+
     Animator animator;
 
     [SerializeField]
@@ -42,6 +44,34 @@ public class Damageable : MonoBehaviour
             {
                 IsAlive = false;
                 characterDeath?.Invoke(gameObject, transform.position);
+
+                // If the Player (Link) dies, then Game Over Screen gets activated
+                if (gameObject.CompareTag("Player"))
+                {
+                    MusicPlayer musicPlayer = FindFirstObjectByType<MusicPlayer>();
+                    if (musicPlayer != null)
+                    {
+                        musicPlayer.PlayGameOver();
+                    }
+
+                    if (goManager != null)
+                    {
+                        goManager.Invoke("EnableGameOver", 0.75f);
+                    }
+                }
+                else if (gameObject.CompareTag("DarkLink"))
+                {
+                    GameObject player = GameObject.FindGameObjectWithTag("Player");
+                    if (player != null && player.TryGetComponent<PlayerController>(out var playerController))
+                    {
+                        playerController.OnVictory();
+                    }
+
+                    if (goManager != null)
+                    {
+                        goManager.Invoke("EnableVictory", 1.8f);
+                    }
+                }
             }
         }
     }
@@ -102,6 +132,7 @@ public class Damageable : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        goManager = Object.FindAnyObjectByType<GameOverManager>(FindObjectsInactive.Include);
     }
 
     private void Update()
@@ -194,7 +225,6 @@ public class Damageable : MonoBehaviour
         // Save the actual health to then set the health to 0 when falling off the level
         int damageTaken = Health;
         Health = 0;
-
         IsAlive = false;
 
         // Warn the UIManager, so that the Slider drops down to 0
@@ -206,6 +236,5 @@ public class Damageable : MonoBehaviour
         {
             rb.simulated = false;
         }
-
     }
 }

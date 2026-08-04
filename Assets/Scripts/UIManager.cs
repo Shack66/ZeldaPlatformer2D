@@ -43,21 +43,25 @@ public class UIManager : MonoBehaviour
         // Convert to screen coordinates 
         Vector3 spawnPosition = Camera.main.WorldToScreenPoint(spawnPosWorld);
 
-        GameObject textObj = Instantiate(damageTextPrefab, spawnPosition, Quaternion.identity, gameCanvas.transform);
-        TMP_Text tmpText = textObj.GetComponent<TMP_Text>();
-
-        if (tmpText != null)
+        //  Check if the prefab and canvas exists before instantiating
+        if (damageTextPrefab != null && gameCanvas != null)
         {
-            tmpText.text = damageReceived.ToString();
-        }
+            GameObject textObj = Instantiate(damageTextPrefab, spawnPosition, Quaternion.identity, gameCanvas.transform);
+            TMP_Text tmpText = textObj.GetComponent<TMP_Text>();
 
-        // Random effect
-        HealthText healthText = textObj.GetComponent<HealthText>();
-        if (healthText != null)
-        {
-            // Some numbers will spawn to the left and others to the right
-            float randomX = Random.Range(-100f, 100f); // Side push
-            healthText.moveSpeed = new Vector3(randomX, Random.Range(100f, 150f), 0);
+            if (tmpText != null)
+            {
+                tmpText.text = damageReceived.ToString();
+            }
+
+            // Random effect
+            HealthText healthText = textObj.GetComponent<HealthText>();
+            if (healthText != null)
+            {
+                // Some numbers will spawn to the left and others to the right
+                float randomX = Random.Range(-100f, 100f); // Side push
+                healthText.moveSpeed = new Vector3(randomX, Random.Range(100f, 150f), 0);
+            }
         }
 
         // Verify if the character damaged is the Player (Link)
