@@ -48,6 +48,12 @@ public class Damageable : MonoBehaviour
                 // If the Player (Link) dies, then Game Over Screen gets activated
                 if (gameObject.CompareTag("Player"))
                 {
+                    MusicPlayer musicPlayer = FindFirstObjectByType<MusicPlayer>();
+                    if (musicPlayer != null)
+                    {
+                        musicPlayer.PlayGameOver();
+                    }
+
                     if (goManager != null)
                     {
                         goManager.Invoke("EnableGameOver", 0.75f);

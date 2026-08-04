@@ -13064,6 +13064,7 @@ MonoBehaviour:
   loopSource: {fileID: 1187510116}
   victoryIntroClip: {fileID: 8300000, guid: 7b2e4f095089ed0429a7089eb0e8f06f, type: 3}
   victoryLoopClip: {fileID: 8300000, guid: 04e3ace334df9d04097d6261c6906bb3, type: 3}
+  gameOverClip: {fileID: 8300000, guid: 62f6e2e1fd493c2499acc9356a311c18, type: 3}
 --- !u!1 &1191356891
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,9 @@ public class MusicPlayer : MonoBehaviour
     public AudioClip victoryIntroClip;
     public AudioClip victoryLoopClip;
 
+    [Header("Game Over Clips")]
+    [SerializeField] private AudioClip gameOverClip;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,6 +26,18 @@ public class MusicPlayer : MonoBehaviour
         if (victoryLoopClip != null) loopSource.clip = victoryLoopClip;
 
         PlayTrack();
+    }
+
+    public void PlayGameOver()
+    {
+        // Stops the music level
+        introSource.Stop();
+        loopSource.Stop();
+
+        // Plays the Game Over theme (no loop)
+        introSource.clip = gameOverClip;
+        introSource.loop = false;
+        introSource.Play();
     }
 
     private void PlayTrack ()
