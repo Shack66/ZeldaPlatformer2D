@@ -62,6 +62,14 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     Damageable damageable;
 
+    void Start()
+    {
+        if (GameOverManager.hasCheckpoint)
+        {
+            transform.position = GameOverManager.lastCheckpointPosition;
+        }
+    }
+
     // Calculates the exact speed the player should have right now
     public float CurrentMoveSpeed
     {

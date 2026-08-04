@@ -63,7 +63,7 @@ public class Damageable : MonoBehaviour
 
                     if (goManager != null)
                     {
-                        goManager.Invoke("EnableVictory", 2f);
+                        goManager.Invoke("EnableVictory", 1.8f);
                     }
                 }
             }
