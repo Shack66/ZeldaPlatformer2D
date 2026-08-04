@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.Audio.GeneratorInstance;
+using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable))]
 public class PlayerController : MonoBehaviour
@@ -46,6 +47,8 @@ public class PlayerController : MonoBehaviour
 
     private float _airYVelocity;
     private float _airXVelocity;
+
+    private bool _isVictory = false;
 
     [Header("Combat Settings")]
     public float minimumFloorTime = 0.2f; // Min time before Link can get up
@@ -382,6 +385,12 @@ public class PlayerController : MonoBehaviour
     // Triggered by Left Stick or WASD/Arrows
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (_isVictory)
+        {
+            moveInput = Vector2.zero;
+            return;
+        }
+
         // Read the direction (-1 to 1)
         moveInput = context.ReadValue<Vector2>();
 
@@ -411,6 +420,11 @@ public class PlayerController : MonoBehaviour
     // Triggered by the Run button (Shift or Button West)
     public void OnRun(InputAction.CallbackContext context)
     {
+        if (_isVictory)
+        {
+            return;
+        }
+
         if (context.started)
         {
             IsRunning = true;
@@ -424,7 +438,11 @@ public class PlayerController : MonoBehaviour
     // Triggered by the Jump button (Space or Button South)
     public void OnJump(InputAction.CallbackContext context)
     {
-        // TODO: Check if alive as well
+        if (_isVictory)
+        {
+            return;
+        }
+
         if (context.started)
         {
             TryGetUp(); // First, Link tries to get up
@@ -450,6 +468,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
+        if (_isVictory)
+        {
+            return;
+        }
+
         if (context.started)
         {
             // If Link's on the floor (Link_OnFloor)
@@ -471,6 +494,11 @@ public class PlayerController : MonoBehaviour
         // Check: This will maybe be for air attacks as well
         if (context.started)
         {
+            if (_isVictory)
+            {
+                return;
+            }
+
             // If Link's on the floor (Link_OnFloor)
             if (damageable.LockVelocity)
             {
@@ -529,5 +557,26 @@ public class PlayerController : MonoBehaviour
     public void OnShieldBlock(Vector2 knockback)
     {
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+    }
+
+    public void OnVictory()
+    {
+        _isVictory = true;
+        moveInput = Vector2.zero; // Cleaning the direction
+        
+        // Blocks inputs and movement
+        IsMoving = false;
+        IsRunning = false;
+
+        // If the Player (Link) is running, then he stops and doesn't slide
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+
+        // Reset triggers
+        animator.ResetTrigger(AnimationStrings.attackTrigger);
+        animator.ResetTrigger(AnimationStrings.rangedAttackTrigger);
+        animator.ResetTrigger(AnimationStrings.jumpTrigger);
+
+        // Victory animation
+        animator.SetTrigger(AnimationStrings.victory);
     }
 }

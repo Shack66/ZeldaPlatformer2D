@@ -55,6 +55,12 @@ public class Damageable : MonoBehaviour
                 }
                 else if (gameObject.CompareTag("DarkLink"))
                 {
+                    GameObject player = GameObject.FindGameObjectWithTag("Player");
+                    if (player != null && player.TryGetComponent<PlayerController>(out var playerController))
+                    {
+                        playerController.OnVictory();
+                    }
+
                     if (goManager != null)
                     {
                         goManager.Invoke("EnableVictory", 2f);
