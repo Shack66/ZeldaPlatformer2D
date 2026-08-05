@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 623d8cc4d5f2c5d459882129f952ecaa
+guid: 479eb43a4a00b6d42ab1f05ee10482f0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: benay-daniel-4-zelda-titlescreen_0
+      name: resumebutton_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1920
-        height: 1080
+        x: 9
+        y: 11
+        width: 300
+        height: 67
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87e07d9e365637d4b8a88d583aca68d4
-      internalID: -464618233
+      spriteID: 66e11187281bef24eaba23bdc077cb99
+      internalID: -1607631642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: resumebutton_1
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 11
+        width: 300
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbc62b5eff3af6749b21dc334062f8d8
+      internalID: -1289483502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: resumebutton_2
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 8
+        width: 300
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a6727083074d1141b9c6ace1d777f07
+      internalID: 596949170
       vertices: []
       indices: 
       edges: []
@@ -135,7 +179,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5da30eeeafc5f1f479b6e83797cd6ac3
+    spriteID: a9fd2372e43b3774785f283060c2f55a
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +191,9 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      benay-daniel-4-zelda-titlescreen_0: -464618233
+      resumebutton_0: -1607631642
+      resumebutton_1: -1289483502
+      resumebutton_2: 596949170
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

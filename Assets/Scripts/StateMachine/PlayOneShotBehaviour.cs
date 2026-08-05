@@ -1,17 +1,50 @@
 using UnityEngine;
+using UnityEngine.Audio;
 public class PlayOneShotBehaviour : StateMachineBehaviour
 {
+    [Header("Audio Settings")]
     public AudioClip soundToPlay;
-    public float volume = 1f;
-    public bool playOnEnter = true, playOnExit = false, playAfterDelay = false;
+    public AudioMixerGroup audioMixerGroup;
+    [Range(0f, 1f)] public float volume = 1f;
 
-    // Filter so that the sfx only sounds in certain characters
-    public string requiredTag = "";
-
-    // Delayed sound timer
+    [Header("Timing")]
+    public bool playOnEnter = true;
+    public bool playOnExit = false;
+    public bool playAfterDelay = false;
     public float playDelay = 0.25f;
+
+    [Header("Filter")]
+    public string requiredTag = ""; // Filter so that the sfx only sounds in certain characters
+
     public float timeSinceEntered = 0f;
     private bool hasDelayedSoundPlayed = false;
+
+    // Cache to reuse Mixer
+    private static AudioMixerGroup cachedMixerGroup;
+
+    private void PlayAudio(Animator animator, AudioClip clip, float vol)
+    {
+        if (clip == null)
+        {
+            return;
+        }
+
+        GameObject tempGO = new GameObject("TempAnimSFX_" + clip.name);
+        tempGO.transform.position = animator.transform.position;
+
+        AudioSource aSource = tempGO.AddComponent<AudioSource>();
+        aSource.clip = clip;
+        aSource.volume = vol;
+        aSource.spatialBlend = 0f;
+
+        if (audioMixerGroup != null)
+        {
+            aSource.outputAudioMixerGroup = audioMixerGroup;
+        }
+
+        aSource.Play();
+        Destroy(tempGO, clip.length);
+    }
 
     private bool ShouldPlay(Animator animator)
     {
