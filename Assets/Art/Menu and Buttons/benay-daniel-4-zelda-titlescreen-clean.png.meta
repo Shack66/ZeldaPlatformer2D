@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 623d8cc4d5f2c5d459882129f952ecaa
+guid: 5219da29b95d8b84dbfd9710d734f63b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: benay-daniel-4-zelda-titlescreen_0
+      name: benay-daniel-4-zelda-titlescreen-clean_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1920
-        height: 1080
+        width: 1365
+        height: 768
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87e07d9e365637d4b8a88d583aca68d4
-      internalID: -464618233
+      spriteID: 696a9d65e55772e4d98564aea9895248
+      internalID: -641859421
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5da30eeeafc5f1f479b6e83797cd6ac3
+    spriteID: 7eeb285a30d4a08499087f5e2fdad951
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      benay-daniel-4-zelda-titlescreen_0: -464618233
+      benay-daniel-4-zelda-titlescreen-clean_0: -641859421
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

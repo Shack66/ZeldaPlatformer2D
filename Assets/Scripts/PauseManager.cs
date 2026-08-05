@@ -15,7 +15,26 @@ public class PauseManager : MonoBehaviour
     [Header("Player Input Reference")]
     [SerializeField] private PlayerInput playerInput;
 
+    [Header("Scene Transition")]
+    [SerializeField] private string mainMenuSceneName = "MainMenuScene";
+
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource sfxAudioSource;
+    [SerializeField] private AudioClip pauseOpenSFX;
+    [SerializeField] private AudioClip pauseCloseSFX;
+
+    [SerializeField] private SceneFader sceneFader;
+
     private bool isPaused = false;
+
+    private void Awake()
+    {
+        // Let AudioSource play even if the global AudioListener is paused
+        if (sfxAudioSource != null)
+        {
+            sfxAudioSource.ignoreListenerPause = true;
+        }
+    }
 
     private void OnEnable()
     {
@@ -61,7 +80,11 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 0f; // Pause game time (physics, timers, etc.)
         AudioListener.pause = true;
 
-        // Deactivates Player's Action Map so that Link ignores the keyboard/controller
+        PlaySFX(pauseOpenSFX);
+
+        AudioListener.pause = true; // Pause all other audio 
+
+        // Deactivate Player's Action Map so that Link ignores the keyboard/controller
         if (playerInput != null)
         {
             playerInput.SwitchCurrentActionMap("UI");
@@ -81,6 +104,8 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f; // Resumes the time normally
         AudioListener.pause = false;
 
+        PlaySFX(pauseCloseSFX);
+
         // Gives back control to the player (Link)
         if (playerInput != null)
         {
@@ -88,10 +113,21 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    public void LoadMainMenu(string mainMenuSceneName)
+    public void LoadMainMenu()
     {
         Time.timeScale = 1f;
         AudioListener.pause = false;
-        SceneManager.LoadScene(mainMenuSceneName);
+        if (sceneFader != null)
+            sceneFader.FadeToScene(mainMenuSceneName);
+        else
+            SceneManager.LoadScene(mainMenuSceneName);
+    }
+
+    private void PlaySFX(AudioClip clip)
+    {
+        if (sfxAudioSource != null && clip != null)
+        {
+            sfxAudioSource.PlayOneShot(clip);
+        }
     }
 }
