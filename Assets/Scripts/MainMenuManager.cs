@@ -26,7 +26,6 @@ public class MainMenuManager : MonoBehaviour
 
     [Header("Credits Scroll")]
     [SerializeField] private ScrollRect creditsScrollRect;
-    [SerializeField] private float gamepadScrollSpeed = 1.5f;
 
     private void Start()
     {

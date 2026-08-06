@@ -608,15 +608,16 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "<size=140%><b><color=#FFD700>ABOUT & CREDITS</color></b></size>\r\n\r\n<size=120%><b><color=#5398FF>PROJECT
-    & CREATION</color></b></size>\r\n<b>Game Developer & Animator:</b> Samuel\r\n<b>Inspired
-    by Scene Arrangement:</b> u/slittle619 (Sam The Bard)\r\n<b>Learning & Base Engine:</b>
-    \"2D Platformer Crash Course in Unity 2022\" by Chris' Tutorials\r\n\r\n<size=120%><b><color=#5398FF>GRAPHICS
-    & ART</color></b></size>\r\n<b>Menu UI & Buttons:</b> Benay Daniel (ArtStation)\r\n<b>Link
-    & Dark Link Sprites (Skyward Sword):</b> Made by GregarLink10, uploaded by GregarLink15\r\n<b>Darknut
-    Sprites (Tales of the World-Style):</b> Uploaded by SmithyGCN\r\n<b>North Temple
-    Assets:</b> Balladofwindfishes & Contributors\r\n<b>Health Bar UI:</b> rappenem
-    (Reddit)\r\n<b>Game Logo Pixel Art:</b> Lachington (Reddit)\r\n<b>Heart Sprite
-    & Item Custom Assets:</b> ChaosMiles07 (Base OoT sprites ripped by GaryCXJk)\r\n\r\n<size=100%><i>Archived
+    & CREATION</color></b></size>\r\n<b>Game Developer & Animator:</b> Samuel Arosemena
+    (github.com/Shack66)\r\n<b>Inspired by Scene Arrangement:</b> u/slittle619 (Sam
+    The Bard)\r\n<b>Learning & Base Engine:</b> \"2D Platformer Crash Course in Unity
+    2022\" by Chris' Tutorials\r\n\r\n<size=120%><b><color=#5398FF>GRAPHICS & ART</color></b></size>\r\n<b>Menu
+    UI & Buttons:</b> Benay Daniel (ArtStation)\r\n<b>Link & Dark Link Sprites (Skyward
+    Sword):</b> Made by GregarLink10, uploaded by GregarLink15\r\n<b>Darknut Sprites
+    (Tales of the World-Style):</b> Uploaded by SmithyGCN\r\n<b>North Temple Assets:</b>
+    Balladofwindfishes & Contributors\r\n<b>Health Bar UI:</b> rappenem (Reddit)\r\n<b>Game
+    Logo Pixel Art:</b> Lachington (Reddit)\r\n<b>Heart Sprite & Item Custom Assets:</b>
+    ChaosMiles07 (Base OoT sprites ripped by GaryCXJk)\r\n\r\n<size=100%><i>Archived
     / Unused Sprites:</i></size>\r\n\u2022 Ganondorf (OoT): Made by GregarLink10,
     uploaded by GregarLink15\r\n\u2022 Stalfos Sprite: Animated by Redhalberd\r\n\r\n<size=120%><b><color=#5398FF>MUSIC
     & AUDIO</color></b></size>\r\n<b>Zelda 2 Temple Theme:</b>\r\nArranged by Sam
@@ -769,7 +770,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1590,8 +1591,8 @@ GameObject:
   - component: {fileID: 1133242362}
   - component: {fileID: 1133242361}
   - component: {fileID: 1133242360}
-  - component: {fileID: 1133242364}
   - component: {fileID: 1133242363}
+  - component: {fileID: 1133242364}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1740,7 +1741,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2585,7 +2586,6 @@ MonoBehaviour:
   sfxAudioSource: {fileID: 1964710031}
   backButtonSfx: {fileID: 8300000, guid: f54f3e243a2cf9848a6dcb0c56b50542, type: 3}
   creditsScrollRect: {fileID: 0}
-  gamepadScrollSpeed: 1.5
 --- !u!4 &1964710030
 Transform:
   m_ObjectHideFlags: 0
