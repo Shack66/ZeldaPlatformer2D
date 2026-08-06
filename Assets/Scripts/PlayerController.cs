@@ -68,6 +68,22 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = GameOverManager.lastCheckpointPosition;
         }
+
+        // Reset when the scene starts
+        _isAirRunning = false;
+        coyoteTimeCounter = 0f;
+        jumpBufferCounter = 0f;
+
+        // Check if the player is already holding the run button upon restarting
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+        if (playerInput != null && playerInput.actions != null)
+        {
+            InputAction runAction = playerInput.actions["Run"];
+            if (runAction != null)
+            {
+                IsRunning = runAction.IsPressed();
+            }
+        }
     }
 
     // Calculates the exact speed the player should have right now
@@ -192,6 +208,8 @@ public class PlayerController : MonoBehaviour
         touchingDirections = GetComponent<TouchingDirections>();
         damageable = GetComponent<Damageable>();
 
+        rb.linearVelocity = Vector2.zero;
+
         defaultGravityScale = rb.gravityScale;
     }
 
@@ -277,7 +295,12 @@ public class PlayerController : MonoBehaviour
         {
             // Refill Coyote Time when on the floor
             coyoteTimeCounter = coyoteTime;
-            _isAirRunning = false; // Reset the air momentum flag
+
+            // Only reset the air momentum flag if Link isn't taking off for a jump.
+            if (rb.linearVelocity.y <= 0.1f)
+            {
+                _isAirRunning = false;
+            }
         }
         else
         {
@@ -433,7 +456,10 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (context.started)
+        // Read whether the button is pressed at this moment
+        IsRunning = context.ReadValueAsButton();
+
+        if (context.performed)
         {
             IsRunning = true;
         }
