@@ -445,8 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75055e187370a8d47887e1f35a3cb163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Darknut
-  walkAcceleration: 1
-  maxSpeed: 1
+  walkSpeed: 1
   walkStopRate: 0.05
   attackZone: {fileID: 5272622531387718995}
   cliffDetectionZone: {fileID: 7933252424679402505}
