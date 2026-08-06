@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -18,12 +20,56 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] private SceneFader sceneFader;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource sfxAudioSource;
+    [SerializeField] private AudioClip backButtonSfx;
+
+    [Header("Credits Scroll")]
+    [SerializeField] private ScrollRect creditsScrollRect;
+
     private void Start()
     {
         Time.timeScale = 1f;
         AudioListener.pause = false;
 
         ShowMainMenu();
+    }
+
+    private void Update()
+    {
+        // Only hear the input if the About panel is opened
+        if (aboutPanel != null && aboutPanel.activeSelf)
+        {
+            // If there's no button selected 
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == null)
+            {
+                bool hasNavInput = false;
+
+                // and the player moves the stick 
+                if (Gamepad.current != null && Gamepad.current.leftStick.ReadValue().magnitude > 0.2f)
+                    hasNavInput = true;
+
+                // or presses the arrows/WASD,
+                if (Keyboard.current != null && (Keyboard.current.wKey.wasPressedThisFrame ||
+                                                 Keyboard.current.sKey.wasPressedThisFrame ||
+                                                 Keyboard.current.upArrowKey.wasPressedThisFrame ||
+                                                 Keyboard.current.downArrowKey.wasPressedThisFrame))
+                    hasNavInput = true;
+
+                if (hasNavInput)
+                {
+                    SetFocus(aboutFirstButton); // Focus the BackButton
+                }
+            }
+
+            bool cancelKeyPressed = Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame; // Esc key
+            bool cancelButtonPressed = Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame; // Button South or B button
+
+            if (cancelKeyPressed || cancelButtonPressed)
+            {
+                CloseAbout();
+            }
+        }
     }
 
     public void PlayGame()
@@ -39,11 +85,21 @@ public class MainMenuManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         aboutPanel.SetActive(true);
-        SetFocus(aboutFirstButton);
+
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 
     public void CloseAbout()
     {
+        // Play the close sfx
+        if (sfxAudioSource != null && backButtonSfx != null)
+        {
+            sfxAudioSource.PlayOneShot(backButtonSfx);
+        }
+
         aboutPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
         SetFocus(mainFirstButton);
