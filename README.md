@@ -9,6 +9,7 @@ This is my first videogame project. It's a basic but dynamic platformer based on
 ### Keyboard & Mouse
 * **Move:** `A` / `D` or `Left` / `Right` Arrow Keys
 * **Jump:** `Spacebar`
+* * **Run:** `Hold Shift`
 * **Attack:** `Left Mouse Button`
 * **Pause Menu:** `Escape`
 * **Skip Intro / Cutscene:** Any
