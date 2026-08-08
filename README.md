@@ -23,7 +23,7 @@ This is my first videogame project. It's a basic but dynamic platformer based on
 * **Attack:** `A` Button
 * **Pause Menu:** `+` Button (Start) or `-` Button (Select) 
 * **Skip Intro / Cutscene:** Any
-* **Shoot Arrow:** ZR / RT (Right Trigger / R2) 
+* **Shoot Arrow:** `ZR` / `RT` (Right Trigger / `R2`) 
 
 ---
 
