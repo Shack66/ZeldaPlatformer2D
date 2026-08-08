@@ -4,6 +4,28 @@ This is my first videogame project. It's a basic but dynamic platformer based on
 
 ---
 
+## Controls
+
+### Keyboard & Mouse
+* **Move:** `A` / `D` or `Left` / `Right` Arrow Keys
+* **Jump:** `Spacebar`
+* **Attack:** `Left Mouse Button`
+* **Pause Menu:** `Escape`
+* **Skip Intro / Cutscene:** Any
+* **Shoot Arrow:** `F` 
+
+
+### Gamepad (Switch Layout)
+* **Move:** `Left Stick`
+* **Jump:** `B` Button
+* **Run:** `Y` Button
+* **Attack:** `A` Button
+* **Pause Menu:** `+` Button (Start) or `-` Button (Select) 
+* **Skip Intro / Cutscene:** Any
+* **Shoot Arrow:** ZR / RT (Right Trigger / R2) 
+
+---
+
 ## Credits & Acknowledgments
 
 ### Project & Creation
