@@ -4,6 +4,40 @@ This is my first videogame project. It's a basic but dynamic platformer based on
 
 ---
 
+## Download & Installation
+
+### Windows
+1. Download the `.zip` file for Windows and extract it.
+2. Open the extracted folder and run `ZeldaPlatformer2D.exe`.
+3. If Microsoft Defender SmartScreen displays a warning (*"Windows protected your PC"*):
+   * Click **"More info"**.
+   * Click **"Run anyway"**.
+
+### Linux
+1. Download the `.zip` file for Linux and extract it.
+2. Open the extracted folder and execute `ZeldaPlatformer2D-v<version>-Linux-x86_64`.
+
+### macOS
+Due to macOS security gatekeeper policies on unsigned apps, follow these steps to run the game:
+
+1. Extract the `.zip` file so the `.app` file is visible.
+2. Open **Terminal**.
+3. Copy and paste the following command into Terminal, ensuring there is a **space at the very end**:
+   ```bash
+   chmod -R +x
+4. Drag and drop the game's `.app` icon from Finder directly into the Terminal window (this automatically fills in the file path).
+5. Press `Enter`.
+> Note: If the game still errors out, try chmod a+x /PathToGame/GameName.app/Contents/MacOS/*
+6. In the same Terminal window, copy and paste this command (leave a space at the end):
+   ```bash
+   xattr -cr
+7. Drag and drop the game's `.app` icon into the Terminal window again.
+8. Press Enter.
+9. Right-click (or hold `Control` and click) the `.app` icon and select **Open**.
+10. If a popup appears asking for confirmation, click **Open** or **Open Anyway**.
+
+---
+
 ## Controls
 
 ### Keyboard & Mouse
@@ -24,6 +58,13 @@ This is my first videogame project. It's a basic but dynamic platformer based on
 * **Pause Menu:** `+` Button (Start) or `-` Button (Select) 
 * **Skip Intro / Cutscene:** Any
 * **Shoot Arrow:** `ZR` / `RT` (Right Trigger / `R2`) 
+
+### Advanced Jump Mechanics & Physics
+
+The movement system features dynamic variable jumping mechanics:
+- **Variable Jump Height**: Tapping the jump button triggers a short hop, while holding it down results in a full-height jump (similar to mechanics seen in _Super Smash Bros._).
+- **Mid-Air Momentum Control**: Holding the Run button (Shift / Y) while in mid-air preserves horizontal velocity for maximum distance. Releasing it immediately dampens your forward momentum for precise landings.
+- **Long Jump (Combined Tech)**: Executing a running jump while holding both Jump and Run optimizes mid-air velocity, allowing Link to cross wide gaps and reach distant platforms effortlessly.
 
 ---
 
