@@ -59,12 +59,18 @@ Due to macOS security gatekeeper policies on unsigned apps, follow these steps t
 * **Skip Intro / Cutscene:** Any
 * **Shoot Arrow:** `ZR` / `RT` (Right Trigger / `R2`) 
 
+## Gameplay Mechanics
 ### Advanced Jump Mechanics & Physics
 
 The movement system features dynamic variable jumping mechanics:
 - **Variable Jump Height**: Tapping the jump button triggers a short hop, while holding it down results in a full-height jump (similar to mechanics seen in _Super Smash Bros._).
 - **Mid-Air Momentum Control**: Holding the Run button (Shift / Y) while in mid-air preserves horizontal velocity for maximum distance. Releasing it immediately dampens your forward momentum for precise landings.
 - **Long Jump (Combined Tech)**: Executing a running jump while holding both Jump and Run optimizes mid-air velocity, allowing Link to cross wide gaps and reach distant platforms effortlessly.
+
+### Combat Mechanics & Enemy Shields
+Darknuts block frontal sword attacks with their shields, causing Link to back off and become temporarily stunned upon striking them directly. However, there are two ways for Link to attack them:
+1. Back Attack: Move behind the enemy to strike their unguarded back.
+2. Air Kick (Aerial Attack): Press the Attack button (Left Click / A) while on mid-air to perform an overhead kick that bypasses shield guards entirely.
 
 ---
 
