@@ -248,7 +248,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -32.528, y: -4.1, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3377739228401938189}
   - {fileID: 2162465960858814285}
@@ -449,6 +449,8 @@ MonoBehaviour:
   walkStopRate: 0.05
   attackZone: {fileID: 5272622531387718995}
   cliffDetectionZone: {fileID: 7933252424679402505}
+  startDirection: 1
+  flipCooldown: 0.5
   _hasTarget: 0
 --- !u!114 &6578662147140160358
 MonoBehaviour:

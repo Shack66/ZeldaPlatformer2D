@@ -12,6 +12,13 @@ public class Darknut : MonoBehaviour
     public DetectionZone attackZone;
     public DetectionZone cliffDetectionZone;
 
+    [Header("Movement & Direction Settings")]
+    public WalkableDirection startDirection = WalkableDirection.Left; 
+
+    [Header("Flip Settings")]
+    public float flipCooldown = 0.5f; // Cooldown to avoid infinite turns on walls
+    private float timeSinceLastFlip = 0f;
+
     Rigidbody2D rb;
     TouchingDirections touchingDirections;
     Animator animator;
@@ -20,7 +27,7 @@ public class Darknut : MonoBehaviour
     public enum WalkableDirection { Left, Right }
 
     private WalkableDirection _walkDirection = WalkableDirection.Left;
-    private Vector2 walkDirectionVector = Vector2.left;
+    private Vector2 walkDirectionVector = Vector2.right;
 
     public WalkableDirection WalkDirection
     { 
@@ -78,14 +85,11 @@ public class Darknut : MonoBehaviour
         animator = GetComponent<Animator>();
         damageable = GetComponent<Damageable>();
 
-        if (transform.localScale.x > 0)
-        {
-            WalkDirection = WalkableDirection.Right;
-        }
-        else
-        {
-            WalkDirection = WalkableDirection.Left;
-        }
+        WalkDirection = startDirection;
+        damageable.isFacingRight = (startDirection == WalkableDirection.Right);
+
+        // Start timer on flipCooldown to allow turning if colliding with a wall
+        timeSinceLastFlip = flipCooldown;
     }
 
     // Update is called once per frame
@@ -97,6 +101,9 @@ public class Darknut : MonoBehaviour
         {
             AttackCooldown -= Time.deltaTime;
         }
+
+        // Increase cooldown timer
+        timeSinceLastFlip += Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -113,7 +120,7 @@ public class Darknut : MonoBehaviour
             }
         }
 
-        if (touchingDirections.IsGrounded && touchingDirections.IsOnWall && CanMove)
+        if (touchingDirections.IsGrounded && touchingDirections.IsOnWall && CanMove && !damageable.LockVelocity && timeSinceLastFlip >= flipCooldown)
         {
             FlipDirection();
         }
@@ -135,16 +142,22 @@ public class Darknut : MonoBehaviour
         {
             Debug.LogError("Current walkable direction is not set to legal values of right or left");
         }
+
+        // Reset the timer every time the darknut turns
+        timeSinceLastFlip = 0f;
     }
 
     public void OnHit(int damage, Vector2 knockback)
     {
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+
+        // Reset timer to avoid turns after knockback
+        timeSinceLastFlip = 0f;
     }
 
     public void OnCliffDetected()
     {
-        if (touchingDirections.IsGrounded)
+        if (touchingDirections.IsGrounded && CanMove && !damageable.LockVelocity && timeSinceLastFlip >= flipCooldown)
         {
             FlipDirection();
         }
